@@ -16,6 +16,8 @@ from dataclasses import dataclass
 from enhanced_arbitrage_monitor import EnhancedArbitrageMonitor, ArbitrageOpportunity
 from config import MONITORING_CONFIG, NOTIFICATION_CONFIG
 from notifications import NotificationService
+from health_monitor import health_monitor
+from aiohttp import web
 import logging
 
 # Настройка логирования
@@ -555,6 +557,18 @@ async def main():
     
     monitor = SmartArbitrageMonitor()
     
+    # Запускаем health check сервер
+    port = int(os.getenv('PORT', 8000))
+    app = web.Application()
+    app.router.add_get('/health', health_monitor.health_check)
+    app.router.add_get('/', health_monitor.health_check)
+    
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', port)
+    await site.start()
+    logger.info(f"🌐 Health check сервер запущен на порту {port}")
+    
     # Обработка сигналов для корректного завершения
     def signal_handler(signum, frame):
         logger.info(f"Получен сигнал {signum}")
@@ -581,6 +595,9 @@ async def main():
         logger.info(f"   Уведомлений отправлено: {monitor.stats['notifications_sent']}")
         logger.info(f"   Очищено устаревших: {monitor.stats['expired_opportunities_cleaned']}")
         logger.info("👋 Умный мониторинг завершен")
+        
+        # Останавливаем web сервер
+        await runner.cleanup()
 
 if __name__ == "__main__":
     try:
