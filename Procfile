@@ -1,0 +1,1 @@
+worker: python smart_arbitrage_monitor.py

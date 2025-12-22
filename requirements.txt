@@ -1,0 +1,10 @@
+aiohttp==3.9.1
+numpy==1.24.3
+asyncio
+logging
+datetime
+dataclasses
+json
+smtplib
+email
+requests

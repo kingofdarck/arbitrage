@@ -1,0 +1,1224 @@
+2025-12-22 22:07:56,377 - __main__ - INFO - 🔴 Запуск LIVE арбитражного монитора
+2025-12-22 22:07:56,378 - __main__ - INFO - ⚡ Обновление каждые 5 секунд с редактированием одного сообщения
+2025-12-22 22:07:56,378 - enhanced_arbitrage_monitor - INFO - Инициализирован монитор с 6 биржами
+2025-12-22 22:07:56,378 - __main__ - INFO - 🔴 Live монитор инициализирован
+2025-12-22 22:07:56,379 - __main__ - INFO - ⚡ Обновление каждые 5 секунд с редактированием сообщения
+2025-12-22 22:07:56,379 - __main__ - INFO - 📱 Telegram: ✅ Включен
+2025-12-22 22:07:56,379 - __main__ - INFO - 🔴 Запуск LIVE арбитражного мониторинга...
+2025-12-22 22:07:56,379 - __main__ - INFO - ⚡ Обновления каждые 5 секунд с редактированием сообщения
+2025-12-22 22:07:56,802 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:07:56,803 - __main__ - INFO - 📱 Отправлено начальное сообщение в Telegram
+2025-12-22 22:07:58,877 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:07:59,382 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:07:59,924 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:08:07,354 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:08:08,965 - enhanced_arbitrage_monitor - INFO - Binance: получено 1761 торговых пар
+2025-12-22 22:08:09,269 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:08:09,271 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:08:09,276 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:08:09,592 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:08:15,526 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:08:15,622 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:08:15,633 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:08:18,555 - enhanced_arbitrage_monitor - INFO - Binance: получено 1761 торговых пар
+2025-12-22 22:08:21,042 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:08:22,857 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:08:22,858 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:08:22,864 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:08:23,186 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:08:29,212 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:08:31,045 - enhanced_arbitrage_monitor - INFO - MEXC: получено 808 торговых пар
+2025-12-22 22:08:34,791 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:08:40,508 - enhanced_arbitrage_monitor - INFO - Binance: получено 1761 торговых пар
+2025-12-22 22:08:42,846 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:08:58,233 - enhanced_arbitrage_monitor - ERROR - Ошибка получения данных с KuCoin: 
+2025-12-22 22:08:58,234 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с kucoin
+2025-12-22 22:08:58,235 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:08:58,238 - enhanced_arbitrage_monitor - INFO - Всего получено 3142 торговых пар с 4 бирж
+2025-12-22 22:09:02,028 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:09:17,233 - enhanced_arbitrage_monitor - ERROR - Ошибка получения данных с Binance: Connection timeout to host https://api.binance.com/api/v3/ticker/price
+2025-12-22 22:09:17,235 - enhanced_arbitrage_monitor - ERROR - Ошибка получения данных с MEXC: Connection timeout to host https://api.mexc.com/api/v3/ticker/24hr
+2025-12-22 22:09:17,236 - enhanced_arbitrage_monitor - ERROR - Ошибка получения данных с KuCoin: Connection timeout to host https://api.kucoin.com/api/v1/market/allTickers
+2025-12-22 22:09:17,902 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:09:25,150 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:09:25,680 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:09:25,681 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с binance
+2025-12-22 22:09:25,682 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с kucoin
+2025-12-22 22:09:25,682 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с mexc
+2025-12-22 22:09:25,683 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:09:25,684 - enhanced_arbitrage_monitor - INFO - Всего получено 572 торговых пар с 2 бирж
+2025-12-22 22:09:26,145 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:09:31,485 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:09:31,527 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:09:31,631 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:09:31,781 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:09:34,393 - enhanced_arbitrage_monitor - INFO - Binance: получено 1761 торговых пар
+2025-12-22 22:09:38,722 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:09:38,723 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:09:38,726 - enhanced_arbitrage_monitor - INFO - Всего получено 3532 торговых пар с 5 бирж
+2025-12-22 22:09:50,280 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:09:56,077 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:09:56,403 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:09:56,500 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:09:56,623 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:09:57,395 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:09:57,436 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:09:57,438 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:09:57,441 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:09:57,816 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:03,290 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:03,354 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:03,446 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:03,464 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:10:03,790 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:10:04,279 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:04,281 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:04,284 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:10:04,634 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:09,974 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:10,059 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:10,181 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:10,208 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:10:10,212 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:11,011 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:11,013 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:11,016 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:10:11,346 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:16,684 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:16,725 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:16,865 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:16,910 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:16,965 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:10:17,773 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:17,775 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:17,778 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:10:18,075 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:23,574 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:23,674 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:23,737 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:23,773 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:24,069 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:10:24,478 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:24,480 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:24,483 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:10:24,812 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:30,530 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:30,636 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:30,715 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:31,186 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:31,337 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:10:31,860 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:31,862 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:31,865 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:10:32,210 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:37,538 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:37,670 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:37,678 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:37,704 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:10:37,769 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:38,189 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:38,192 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:38,194 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:10:38,595 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:38,596 - __main__ - INFO - 🔴 Live #12 за 1.0с | Биржи: 5 | Пары: 3,533 | Возможности: 0 | Обновлений: 12
+2025-12-22 22:10:44,051 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:44,096 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:44,152 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:44,173 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:10:44,177 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:44,598 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:44,600 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:44,603 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:10:44,970 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:50,344 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:50,356 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:50,419 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:50,571 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:10:50,579 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:50,973 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:50,975 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:50,978 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:10:51,313 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:10:56,688 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:10:56,694 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:10:56,806 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:10:56,840 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:10:56,887 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:10:57,306 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:10:57,307 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:10:57,310 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:10:57,587 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:03,184 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:03,261 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:03,310 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:03,366 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:11:03,403 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:04,676 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:04,678 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:04,681 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:11:05,212 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:10,781 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:10,802 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:10,915 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:10,993 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:11,021 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:11:11,593 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:11,596 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:11,599 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:11:12,000 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:17,598 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:17,698 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:17,722 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:11:17,786 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:17,824 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:18,892 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:18,894 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:18,897 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:11:19,242 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:24,610 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:24,617 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:24,752 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:24,799 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:24,906 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:11:25,240 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:25,242 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:25,245 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:11:25,593 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:30,949 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:30,993 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:31,047 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:31,157 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:31,442 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:11:31,595 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:31,597 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:31,600 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:11:31,888 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:37,261 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:37,319 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:37,385 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:37,456 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:11:37,475 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:37,937 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:37,939 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:37,942 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:11:38,313 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:43,669 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:43,854 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:11:43,857 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:43,969 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:43,976 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:44,325 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:44,328 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:44,331 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:11:44,691 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:50,061 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:50,066 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:50,207 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:50,254 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:50,278 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:11:50,671 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:50,673 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:50,676 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:11:50,966 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:56,520 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:11:56,529 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:11:56,621 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:11:56,655 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:11:56,822 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:11:57,574 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:11:57,577 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:11:57,580 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:11:57,921 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:11:57,922 - __main__ - INFO - 🔴 Live #24 за 1.6с | Биржи: 5 | Пары: 3,536 | Возможности: 1 | Обновлений: 24
+2025-12-22 22:12:03,290 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:03,298 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:03,405 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:03,482 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:03,528 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:12:04,149 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:04,151 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:04,154 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:12:05,645 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:11,011 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:11,028 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:11,163 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:11,219 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:11,251 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:12:11,646 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:11,648 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:11,652 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:12:12,320 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:17,669 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:17,697 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:17,776 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:17,819 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:12:17,881 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:18,424 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:18,427 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:18,430 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:12:18,788 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:24,148 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:24,177 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:24,316 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:24,377 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:12:24,414 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:25,277 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:25,278 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:25,281 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:12:26,519 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:31,860 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:31,932 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:31,956 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:32,055 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:12:32,081 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:32,705 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:32,708 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:32,711 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:12:34,723 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:40,576 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:40,671 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:40,819 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:40,836 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:12:40,842 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:41,383 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:41,384 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:41,387 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:12:41,746 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:47,078 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:47,173 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:47,233 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:12:47,298 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:47,304 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:47,929 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:47,931 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:47,934 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:12:48,231 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:12:53,571 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:12:53,723 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:12:53,833 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:12:54,002 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:12:54,170 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:12:55,085 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:12:55,088 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:12:55,091 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:12:55,477 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:13:00,805 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:13:00,906 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:13:01,039 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:13:01,063 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:13:01,079 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:13:02,077 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:13:02,080 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:13:02,082 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:13:03,564 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:13:09,337 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:13:09,357 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:13:09,458 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:13:09,459 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:13:10,014 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:13:10,345 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:13:10,347 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:13:10,349 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:13:10,649 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:13:16,537 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:13:16,616 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:13:16,656 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:13:16,732 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:13:16,748 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:13:17,462 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:13:17,464 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:13:17,467 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:13:17,781 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:13:23,123 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:13:23,213 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:13:23,213 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:13:23,265 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:13:23,412 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:13:24,208 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:13:24,210 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:13:24,214 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:13:24,530 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:13:24,531 - __main__ - INFO - 🔴 Live #36 за 1.4с | Биржи: 5 | Пары: 3,534 | Возможности: 0 | Обновлений: 36
+2025-12-22 22:13:33,044 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:13:33,934 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:13:35,199 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:13:42,301 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:13:43,044 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:13:45,287 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:13:45,290 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:13:45,293 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:13:45,631 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:13:51,189 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:13:53,136 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:13:57,635 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:00,100 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:14:01,229 - enhanced_arbitrage_monitor - ERROR - Ошибка получения данных с OKX: Connection timeout to host https://www.okx.com/api/v5/market/tickers?instType=SPOT
+2025-12-22 22:14:01,537 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:01,539 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с okx
+2025-12-22 22:14:01,540 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:01,544 - enhanced_arbitrage_monitor - INFO - Всего получено 3291 торговых пар с 4 бирж
+2025-12-22 22:14:09,002 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:14:14,451 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:14:14,581 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:14:14,589 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:14:14,609 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:14,715 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:14:15,533 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:15,535 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:15,538 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:14:15,858 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:14:21,186 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:14:21,212 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:14:21,336 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:14:21,344 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:14:21,353 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:22,555 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:22,559 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:22,562 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:14:23,160 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:14:28,833 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:14:28,907 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:14:28,952 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:14:28,974 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:14:28,990 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:29,985 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:29,990 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:29,998 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:14:30,340 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:14:36,086 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:14:36,293 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:14:36,296 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:14:36,306 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:36,567 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:14:37,329 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:37,332 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:37,335 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:14:37,619 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:14:43,099 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:14:43,142 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:14:43,236 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:14:43,304 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:43,538 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:14:43,817 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:43,819 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:43,821 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:14:44,753 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:14:50,193 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:14:50,308 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:14:50,310 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:14:50,963 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:14:52,642 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:14:54,107 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:14:54,109 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:14:54,116 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:14:56,004 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:01,509 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:15:01,535 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:01,651 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:01,656 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:15:01,656 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:02,730 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:15:02,733 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:02,737 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:15:03,055 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:08,349 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:15:08,425 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:08,545 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:08,547 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:08,569 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:15:09,358 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:09,362 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:09,367 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:15:09,862 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:15,269 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:15:15,334 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:15,431 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:15:15,435 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:15,478 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:16,363 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:16,367 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:16,373 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:15:17,713 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:23,221 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:15:23,232 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:23,322 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:23,728 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:15:25,882 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:26,504 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:26,506 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:26,511 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:15:27,383 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:27,384 - __main__ - INFO - 🔴 Live #48 за 3.8с | Биржи: 5 | Пары: 3,536 | Возможности: 1 | Обновлений: 48
+2025-12-22 22:15:32,933 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:33,080 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:33,081 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:33,188 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:15:33,728 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:33,850 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:15:33,852 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:33,857 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:15:34,250 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:40,280 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:40,370 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:15:40,375 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:15:40,380 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:40,582 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:40,987 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:40,991 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:40,996 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:15:42,142 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:47,627 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:47,659 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:15:47,673 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:15:47,681 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:47,766 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:48,448 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:48,451 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:48,455 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:15:49,010 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:15:54,498 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:15:54,508 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:15:54,549 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:15:54,586 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:15:54,637 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:15:55,258 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:15:55,261 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:15:55,264 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:15:55,850 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:01,178 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:16:01,195 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:01,321 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:01,328 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:01,329 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:02,018 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:02,021 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:02,024 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:16:02,372 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:07,618 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:16:07,703 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:07,768 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:07,825 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:08,456 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:08,659 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:08,660 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:08,666 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:16:09,099 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:14,575 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:14,637 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:16:14,638 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:15,027 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:15,094 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:15,703 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:15,706 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:15,709 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:16:16,044 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:21,764 - enhanced_arbitrage_monitor - INFO - MEXC: получено 809 торговых пар
+2025-12-22 22:16:21,789 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:21,830 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:22,009 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:22,011 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:22,509 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:22,513 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:22,517 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:16:23,663 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:29,220 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:16:29,294 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:29,334 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:29,336 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:29,441 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:30,082 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:30,085 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:30,091 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:16:31,148 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:36,392 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:16:36,473 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:36,514 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:36,530 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:36,622 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:37,244 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:37,251 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:37,258 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:16:38,208 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:43,459 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:16:43,660 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:43,663 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:43,696 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:43,888 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:44,880 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:44,884 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:44,891 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:16:45,371 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:50,693 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:16:50,718 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:16:50,756 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:16:50,859 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:16:50,921 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:16:51,826 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:16:51,830 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:16:51,836 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:16:54,555 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:16:54,556 - __main__ - INFO - 🔴 Live #60 за 1.5с | Биржи: 5 | Пары: 3,540 | Возможности: 1 | Обновлений: 60
+2025-12-22 22:16:54,557 - __main__ - INFO - 📈 СТАТИСТИКА (uptime: 0:08:58.178281):
+2025-12-22 22:16:54,558 - __main__ - INFO -    Циклов: 60
+2025-12-22 22:16:54,558 - __main__ - INFO -    Всего возможностей: 52
+2025-12-22 22:16:54,559 - __main__ - INFO -    Среднее за цикл: 0.9
+2025-12-22 22:16:54,559 - __main__ - INFO -    Лучшая прибыль: 0.33%
+2025-12-22 22:16:54,560 - __main__ - INFO -    Обновлений сообщения: 60
+2025-12-22 22:17:00,158 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:17:00,213 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:00,257 - enhanced_arbitrage_monitor - INFO - Bybit: получено 328 торговых пар
+2025-12-22 22:17:00,258 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:00,363 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:00,983 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:00,989 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:00,995 - enhanced_arbitrage_monitor - INFO - Всего получено 3541 торговых пар с 5 бирж
+2025-12-22 22:17:01,437 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:17:06,777 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:17:06,857 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:06,896 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:17:06,912 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:08,092 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:08,233 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:08,235 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:08,239 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:17:08,925 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:17:17,274 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:17,357 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:17:17,792 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:19,089 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:17:24,948 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:26,849 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:26,850 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:26,854 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:17:29,092 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:17:34,502 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:34,582 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:34,879 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:17:35,038 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:36,184 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:17:36,776 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:36,781 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:36,788 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:17:37,939 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:17:43,317 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:43,366 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:43,426 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:43,434 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:17:44,394 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:17:44,464 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:44,469 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:44,473 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:17:45,046 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:17:50,394 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:50,481 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:17:50,550 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:50,599 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:50,678 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:17:51,226 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:51,229 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:51,235 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:17:51,689 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:17:57,239 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:17:57,388 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:17:57,457 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:17:57,491 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:17:57,736 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:17:58,907 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:17:58,910 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:17:58,913 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:17:59,793 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:18:05,739 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:18:05,762 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:18:10,531 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:18:11,307 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:18:14,185 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:18:14,793 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:18:14,796 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:18:14,799 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:18:15,452 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:18:20,915 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:18:20,995 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:18:21,037 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:18:21,562 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:18:22,061 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:18:22,153 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:18:22,158 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:18:22,161 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:18:23,795 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:18:29,194 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:18:29,285 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:18:29,316 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:18:29,839 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:18:31,920 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:18:31,964 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:18:31,970 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:18:31,975 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:18:32,657 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:18:38,056 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:18:38,150 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:18:39,023 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:18:39,384 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:18:39,418 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:18:39,963 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:18:39,973 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:18:39,992 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:19:01,031 - notifications - ERROR - Ошибка при отправке в Telegram: Cannot connect to host api.telegram.org:443 ssl:default [Превышен таймаут семафора]
+2025-12-22 22:19:06,611 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:06,790 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:06,917 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:06,966 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:19:07,046 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:07,944 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:19:07,948 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:07,951 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:19:08,577 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:08,578 - __main__ - INFO - 🔴 Live #72 за 1.9с | Биржи: 5 | Пары: 3,539 | Возможности: 0 | Обновлений: 71
+2025-12-22 22:19:14,025 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:14,144 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:14,239 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:19:14,266 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:14,509 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:15,002 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:19:15,004 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:15,008 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:19:17,584 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:23,132 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:23,160 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:23,213 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:23,262 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:23,570 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:19:24,436 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:19:24,440 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:24,443 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:19:24,870 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:30,200 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:19:30,251 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:30,268 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:30,285 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:30,374 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:30,850 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:19:30,853 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:30,857 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:19:31,276 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:36,640 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:19:36,717 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:36,757 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:36,760 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:36,843 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:37,454 - enhanced_arbitrage_monitor - INFO - Binance: получено 1762 торговых пар
+2025-12-22 22:19:37,459 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:37,462 - enhanced_arbitrage_monitor - INFO - Всего получено 3537 торговых пар с 5 бирж
+2025-12-22 22:19:39,107 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:44,437 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:19:44,547 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:44,553 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:44,584 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:44,657 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:45,638 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:19:45,641 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:45,644 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:19:46,502 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:51,820 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:19:51,873 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:51,937 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:51,937 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:52,023 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:19:52,539 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:19:52,542 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:19:52,545 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:19:53,181 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:19:58,612 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:19:58,727 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:19:58,758 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:19:58,777 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:19:58,838 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:00,196 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:00,198 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:00,202 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:20:00,577 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:06,103 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:06,284 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:20:06,404 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:06,406 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:06,529 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:07,032 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:07,034 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:07,037 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:20:07,367 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:12,766 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:12,827 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:12,830 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:12,846 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:20:13,017 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:13,523 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:13,526 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:13,529 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:20:14,031 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:19,277 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:20:19,335 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:19,383 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:19,521 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:19,527 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:20,267 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:20,269 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:20,272 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:20:20,646 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:26,415 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:20:26,511 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:26,529 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:26,611 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:26,699 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:27,127 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:27,129 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:27,132 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:20:27,651 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:32,909 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:20:32,953 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:32,999 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:33,093 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:33,137 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:33,648 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:33,650 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:33,653 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:20:34,158 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:34,159 - __main__ - INFO - 🔴 Live #84 за 1.0с | Биржи: 5 | Пары: 3,539 | Возможности: 0 | Обновлений: 83
+2025-12-22 22:20:40,136 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:40,204 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:40,433 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:20:40,509 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:41,353 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:41,392 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:41,397 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:41,401 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:20:42,018 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:47,759 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:47,781 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:48,009 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:48,041 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:20:48,173 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:48,790 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:48,793 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:48,797 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:20:51,399 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:20:56,666 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:20:56,756 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:20:56,774 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:20:56,775 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:20:57,029 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:20:58,355 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:20:58,358 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:20:58,362 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:20:59,953 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:21:05,364 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:21:05,398 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:21:05,453 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:21:05,491 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:21:05,868 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:21:06,291 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:21:06,297 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:21:06,301 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:21:06,817 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:21:12,197 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:21:12,267 - enhanced_arbitrage_monitor - INFO - MEXC: получено 814 торговых пар
+2025-12-22 22:21:12,301 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:21:12,331 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:21:12,397 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:21:13,451 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:21:13,453 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:21:13,456 - enhanced_arbitrage_monitor - INFO - Всего получено 3540 торговых пар с 5 бирж
+2025-12-22 22:21:29,012 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:21:34,787 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:21:34,852 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:21:34,897 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:21:34,899 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:21:35,016 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:21:35,845 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:21:35,848 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:21:35,855 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:21:36,300 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:21:41,639 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:21:41,688 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:21:41,691 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:21:41,736 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:21:41,787 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:21:43,333 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:21:43,336 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:21:43,343 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:21:43,689 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:21:49,030 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:21:49,049 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:21:49,127 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:21:49,155 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:21:49,313 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:21:49,852 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:21:49,855 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:21:49,861 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:21:50,218 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:21:55,497 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:21:55,560 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:21:55,565 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:21:55,579 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:21:55,667 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 390 торговых пар
+2025-12-22 22:21:56,339 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:21:56,342 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:21:56,350 - enhanced_arbitrage_monitor - INFO - Всего получено 3539 торговых пар с 5 бирж
+2025-12-22 22:21:56,951 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:02,267 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:02,297 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:02,483 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:02,598 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:03,030 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:03,177 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:22:03,180 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:03,183 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:22:03,646 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:08,906 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:22:09,078 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:09,083 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:09,103 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:09,192 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:09,654 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:09,657 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:09,661 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:22:10,057 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:15,382 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:15,443 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:15,550 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:15,552 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:15,632 - enhanced_arbitrage_monitor - INFO - MEXC: получено 813 торговых пар
+2025-12-22 22:22:16,011 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:16,016 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:16,020 - enhanced_arbitrage_monitor - INFO - Всего получено 3538 торговых пар с 5 бирж
+2025-12-22 22:22:16,335 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:16,335 - __main__ - INFO - 🔴 Live #96 за 1.0с | Биржи: 5 | Пары: 3,538 | Возможности: 0 | Обновлений: 95
+2025-12-22 22:22:21,675 - enhanced_arbitrage_monitor - INFO - MEXC: получено 810 торговых пар
+2025-12-22 22:22:21,719 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:21,743 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:21,768 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:21,856 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:22,461 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:22,465 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:22,468 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:22:22,816 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:28,059 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:22:28,373 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:28,384 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:28,385 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:28,491 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:29,154 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:29,158 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:29,164 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:22:29,584 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:34,926 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:22:34,951 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:34,993 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:35,022 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:35,098 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:35,883 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:35,887 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:35,892 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:22:36,336 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:41,653 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:22:41,693 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:41,758 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:41,946 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:42,040 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:42,589 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:42,592 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:42,595 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:22:43,085 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:48,331 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:22:48,403 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:48,427 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:48,442 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:48,530 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:49,016 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:49,021 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:49,027 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:22:49,379 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:22:54,761 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:22:54,814 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:22:54,821 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:22:54,833 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:22:54,925 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:22:55,380 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:22:55,383 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:22:55,386 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:22:55,671 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:01,018 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:01,075 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:01,081 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:23:01,093 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:01,178 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:01,665 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:01,669 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:01,675 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:23:01,968 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:07,230 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:07,271 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:07,447 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:07,455 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:07,457 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:08,004 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:08,006 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:08,009 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:08,360 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:13,607 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:13,671 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:13,704 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:13,720 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:13,830 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:14,292 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:14,296 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:14,304 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:14,675 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:19,907 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:19,971 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:20,008 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:20,028 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:20,129 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:20,771 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:20,775 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:20,780 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:21,081 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:26,418 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:26,491 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:26,561 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:26,716 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:26,742 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:27,174 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:27,177 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:27,182 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:27,523 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:32,874 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:32,880 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:32,903 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:33,001 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:33,474 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:34,459 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:34,462 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:34,467 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:34,971 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:34,973 - __main__ - INFO - 🔴 Live #108 за 1.9с | Биржи: 5 | Пары: 3,535 | Возможности: 0 | Обновлений: 107
+2025-12-22 22:23:40,296 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:40,339 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:40,362 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:40,378 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:40,467 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:40,944 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:40,947 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:40,953 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:41,288 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:46,539 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:46,613 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:46,637 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:46,725 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:46,764 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:47,186 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:47,189 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:47,192 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:47,519 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:52,753 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:52,828 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:52,859 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:52,982 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:52,983 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:53,456 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:53,459 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:53,462 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:23:53,789 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:23:59,040 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:23:59,096 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:23:59,144 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:23:59,166 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:23:59,280 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:23:59,984 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:23:59,987 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:23:59,990 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:24:00,500 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:05,740 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:05,785 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:05,830 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:05,970 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:06,071 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 389 торговых пар
+2025-12-22 22:24:06,706 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:06,708 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:06,711 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:24:07,070 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:12,427 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:12,465 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:12,503 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:12,567 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:12,586 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:13,870 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:13,872 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:13,875 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:14,246 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:19,515 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:19,573 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:19,601 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:19,699 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:20,550 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:20,563 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:20,564 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:20,567 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:20,892 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:26,142 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:26,195 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:26,234 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:26,399 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:26,400 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:26,963 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:26,965 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:26,968 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:27,303 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:32,536 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:32,607 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:32,642 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:32,684 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:32,748 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:33,276 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:33,278 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:33,281 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:33,776 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:39,142 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:39,290 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:39,317 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:39,352 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:39,736 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:41,165 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:41,167 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:41,171 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:42,570 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:48,243 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:48,363 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:48,408 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:48,447 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:48,564 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:49,313 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:49,315 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:49,318 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:50,213 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:55,456 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:24:55,531 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:24:55,566 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:24:55,585 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:24:55,694 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:24:56,296 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:24:56,298 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:24:56,301 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:24:56,601 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:24:56,602 - __main__ - INFO - 🔴 Live #120 за 1.1с | Биржи: 5 | Пары: 3,533 | Возможности: 0 | Обновлений: 119
+2025-12-22 22:24:56,602 - __main__ - INFO - 📈 СТАТИСТИКА (uptime: 0:17:00.223863):
+2025-12-22 22:24:56,603 - __main__ - INFO -    Циклов: 120
+2025-12-22 22:24:56,603 - __main__ - INFO -    Всего возможностей: 59
+2025-12-22 22:24:56,604 - __main__ - INFO -    Среднее за цикл: 0.5
+2025-12-22 22:24:56,604 - __main__ - INFO -    Лучшая прибыль: 0.33%
+2025-12-22 22:24:56,605 - __main__ - INFO -    Обновлений сообщения: 119
+2025-12-22 22:25:02,067 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:25:02,142 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:02,212 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:25:02,246 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:02,335 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:02,784 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:02,786 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:02,788 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:25:03,159 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:08,399 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:25:08,506 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:25:08,514 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:08,565 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:08,690 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:09,603 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:09,605 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:09,608 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:25:09,961 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:15,223 - enhanced_arbitrage_monitor - INFO - MEXC: получено 811 торговых пар
+2025-12-22 22:25:15,296 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:25:15,316 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:15,317 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:15,429 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:15,944 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:15,946 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:15,950 - enhanced_arbitrage_monitor - INFO - Всего получено 3533 торговых пар с 5 бирж
+2025-12-22 22:25:16,272 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:21,529 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:25:21,575 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:25:21,619 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:21,633 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:21,746 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:22,189 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:22,193 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:22,200 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:25:22,742 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:27,980 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:25:28,075 - enhanced_arbitrage_monitor - INFO - Bybit: получено 325 торговых пар
+2025-12-22 22:25:28,084 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:28,133 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:28,223 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:29,031 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:29,034 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:29,040 - enhanced_arbitrage_monitor - INFO - Всего получено 3534 торговых пар с 5 бирж
+2025-12-22 22:25:29,627 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:35,423 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:35,554 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:36,476 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:36,926 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:36,935 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:25:38,596 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:25:38,598 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:38,601 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:25:39,434 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:44,798 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:45,218 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:25:45,425 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:25:45,864 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:46,088 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:47,350 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:47,353 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:47,360 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:25:48,064 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:25:53,603 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:25:53,687 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:25:53,930 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:25:54,018 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:25:54,255 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:25:54,671 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:25:54,673 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:25:54,677 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:25:55,092 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:26:00,388 - enhanced_arbitrage_monitor - INFO - Bybit: получено 326 торговых пар
+2025-12-22 22:26:00,438 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:26:01,003 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:26:01,011 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:26:01,016 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:26:01,829 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:26:01,830 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:26:01,833 - enhanced_arbitrage_monitor - INFO - Всего получено 3535 торговых пар с 5 бирж
+2025-12-22 22:26:02,109 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:26:07,352 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:26:07,437 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:26:07,491 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:26:07,733 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:26:07,834 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:26:08,830 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:26:08,833 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:26:08,836 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:26:09,196 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:26:14,792 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:26:14,816 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:26:14,829 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:26:15,343 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:26:15,366 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:26:15,783 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:26:15,785 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:26:15,789 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
+2025-12-22 22:26:17,455 - notifications - INFO - Уведомление отправлено в Telegram
+2025-12-22 22:26:23,431 - enhanced_arbitrage_monitor - INFO - MEXC: получено 812 торговых пар
+2025-12-22 22:26:23,481 - enhanced_arbitrage_monitor - INFO - Bybit: получено 327 торговых пар
+2025-12-22 22:26:23,534 - enhanced_arbitrage_monitor - INFO - Bitget: получено 0 торговых пар
+2025-12-22 22:26:23,744 - enhanced_arbitrage_monitor - INFO - KuCoin: получено 387 торговых пар
+2025-12-22 22:26:23,846 - enhanced_arbitrage_monitor - INFO - OKX: получено 247 торговых пар
+2025-12-22 22:26:24,623 - enhanced_arbitrage_monitor - INFO - Binance: получено 1763 торговых пар
+2025-12-22 22:26:24,625 - enhanced_arbitrage_monitor - WARNING - Не удалось получить данные с bitget
+2025-12-22 22:26:24,628 - enhanced_arbitrage_monitor - INFO - Всего получено 3536 торговых пар с 5 бирж
