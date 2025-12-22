@@ -245,60 +245,7 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
             
         except Exception as e:
             logger.error(f"❌ Ошибка отправки уведомления о запуске: {e}")
-        """Отправка раздельных уведомлений о новых возможностях по типам"""
-        if not new_opportunities or not NOTIFICATION_CONFIG['telegram']['enabled']:
-            return
-        
-        try:
-            # Разделяем возможности по типам
-            cross_exchange_opps = [opp for opp in new_opportunities if opp.type == 'cross_exchange']
-            triangular_opps = [opp for opp in new_opportunities if opp.type == 'triangular']
-            
-            messages_sent = 0
-            
-            # Отправляем межбиржевые возможности
-            if cross_exchange_opps:
-                # Ограничиваем до 10 возможностей на сообщение
-                limited_cross = cross_exchange_opps[:10]
-                message = self.format_cross_exchange_message(limited_cross)
-                
-                # Добавляем статистику в конец сообщения
-                message += f"""
 
-📊 СТАТИСТИКА:
-   🔄 Циклов: {self.stats['total_cycles']}
-   🆕 Новых возможностей: {self.stats['new_opportunities_found']}
-   📱 Уведомлений: {self.stats['notifications_sent']}
-   🔍 Отслеживается: {len(self.tracked_opportunities)}
-"""
-                
-                await NotificationService.send_telegram(message)
-                messages_sent += 1
-                logger.info(f"📱 Отправлено уведомление о {len(limited_cross)} межбиржевых возможностях")
-            
-            # Отправляем треугольные возможности
-            if triangular_opps:
-                # Ограничиваем до 8 возможностей на сообщение (они длиннее)
-                limited_triangular = triangular_opps[:8]
-                message = self.format_triangular_message(limited_triangular)
-                
-                # Добавляем статистику в конец сообщения
-                message += f"""
-
-📊 СТАТИСТИКА:
-   🔄 Циклов: {self.stats['total_cycles']}
-   🆕 Новых возможностей: {self.stats['new_opportunities_found']}
-   📱 Уведомлений: {self.stats['notifications_sent']}
-   🔍 Отслеживается: {len(self.tracked_opportunities)}
-"""
-                
-                await NotificationService.send_telegram(message)
-                messages_sent += 1
-                logger.info(f"📱 Отправлено уведомление о {len(limited_triangular)} треугольных возможностях")
-            
-            self.stats['notifications_sent'] += messages_sent
-            self.stats['last_notification_time'] = datetime.now()
-            
     async def send_new_opportunities_notification(self, new_opportunities: List[ArbitrageOpportunity]):
         """Отправка раздельных уведомлений о новых возможностях по типам"""
         if not new_opportunities or not NOTIFICATION_CONFIG['telegram']['enabled']:
@@ -350,9 +297,6 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
                 await NotificationService.send_telegram(message)
                 messages_sent += 1
                 logger.info(f"📱 Отправлено уведомление о {len(limited_triangular)} треугольных возможностях")
-            
-            self.stats['notifications_sent'] += messages_sent
-            self.stats['last_notification_time'] = datetime.now()
             
         except Exception as e:
             logger.error(f"❌ Ошибка отправки уведомления: {e}")
