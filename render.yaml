@@ -6,7 +6,6 @@ services:
     plan: free
     region: oregon
     branch: main
-    healthCheckPath: /health
     envVars:
       - key: TELEGRAM_BOT_TOKEN
         sync: false

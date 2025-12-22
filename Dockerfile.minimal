@@ -30,9 +30,5 @@ ENV PYTHONUNBUFFERED=1
 # Открываем порт для health check
 EXPOSE 8000
 
-# Health check для контейнера
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
-
 # Команда запуска умного монитора
 CMD ["python", "smart_arbitrage_monitor.py"]

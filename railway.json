@@ -2,13 +2,11 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
-    "dockerfilePath": "Dockerfile.minimal"
+    "dockerfilePath": "Dockerfile.railway"
   },
   "deploy": {
     "startCommand": "python smart_arbitrage_monitor.py",
-    "healthcheckPath": "/health",
-    "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyMaxRetries": 3
   }
 }

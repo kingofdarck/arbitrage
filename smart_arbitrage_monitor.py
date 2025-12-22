@@ -557,17 +557,26 @@ async def main():
     
     monitor = SmartArbitrageMonitor()
     
-    # Запускаем health check сервер
-    port = int(os.getenv('PORT', 8000))
-    app = web.Application()
-    app.router.add_get('/health', health_monitor.health_check)
-    app.router.add_get('/', health_monitor.health_check)
-    
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, '0.0.0.0', port)
-    await site.start()
-    logger.info(f"🌐 Health check сервер запущен на порту {port}")
+    # Запускаем health check сервер только если есть переменная PORT (для Railway/Render)
+    port = os.getenv('PORT')
+    if port:
+        try:
+            port = int(port)
+            app = web.Application()
+            app.router.add_get('/health', health_monitor.health_check)
+            app.router.add_get('/', health_monitor.health_check)
+            
+            runner = web.AppRunner(app)
+            await runner.setup()
+            site = web.TCPSite(runner, '0.0.0.0', port)
+            await site.start()
+            logger.info(f"🌐 Health check сервер запущен на порту {port}")
+        except Exception as e:
+            logger.warning(f"⚠️ Не удалось запустить health check сервер: {e}")
+            runner = None
+    else:
+        logger.info("ℹ️ Переменная PORT не найдена, health check сервер не запускается")
+        runner = None
     
     # Обработка сигналов для корректного завершения
     def signal_handler(signum, frame):
@@ -596,8 +605,13 @@ async def main():
         logger.info(f"   Очищено устаревших: {monitor.stats['expired_opportunities_cleaned']}")
         logger.info("👋 Умный мониторинг завершен")
         
-        # Останавливаем web сервер
-        await runner.cleanup()
+        # Останавливаем web сервер если он был запущен
+        if runner:
+            try:
+                await runner.cleanup()
+                logger.info("🛑 Health check сервер остановлен")
+            except Exception as e:
+                logger.warning(f"⚠️ Ошибка остановки сервера: {e}")
 
 if __name__ == "__main__":
     try:
