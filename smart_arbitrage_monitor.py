@@ -16,8 +16,6 @@ from dataclasses import dataclass
 from enhanced_arbitrage_monitor import EnhancedArbitrageMonitor, ArbitrageOpportunity
 from config import MONITORING_CONFIG, NOTIFICATION_CONFIG
 from notifications import NotificationService
-from health_monitor import health_monitor
-from aiohttp import web
 import logging
 
 # Настройка логирования
@@ -226,47 +224,6 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
         # Этот метод больше не используется, но оставляем для совместимости
         return self.format_cross_exchange_message(opportunities)
 
-    async def start_health_server(self):
-        """Запуск HTTP сервера для health check (для бесплатного хостинга)"""
-        try:
-            from aiohttp import web
-            
-            async def health_check(request):
-                """Health check endpoint"""
-                uptime = datetime.now() - self.stats['start_time']
-                
-                status_data = {
-                    "status": "healthy",
-                    "uptime_seconds": int(uptime.total_seconds()),
-                    "uptime_human": str(uptime),
-                    "total_cycles": self.stats['total_cycles'],
-                    "new_opportunities": self.stats['new_opportunities_found'],
-                    "notifications_sent": self.stats['notifications_sent'],
-                    "tracked_opportunities": len(self.tracked_opportunities),
-                    "timestamp": datetime.now().isoformat()
-                }
-                
-                return web.json_response(status_data)
-            
-            app = web.Application()
-            app.router.add_get('/health', health_check)
-            app.router.add_get('/', health_check)
-            
-            runner = web.AppRunner(app)
-            await runner.setup()
-            
-            # Используем порт из переменной окружения (для Heroku/Railway)
-            port = int(os.getenv('PORT', 8000))
-            site = web.TCPSite(runner, '0.0.0.0', port)
-            await site.start()
-            
-            logger.info(f"🌐 Health check сервер запущен на порту {port}")
-            
-        except ImportError:
-            logger.warning("⚠️ aiohttp не установлен, health check сервер недоступен")
-        except Exception as e:
-            logger.error(f"❌ Ошибка запуска health check сервера: {e}")
-
     async def send_startup_notification(self):
         """Отправка уведомления о запуске системы"""
         try:
@@ -403,9 +360,6 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
     async def run(self, check_interval: int = 10):
         """Запуск монитора с поддержкой бесплатного хостинга"""
         await self.start_session()
-        
-        # Запускаем health check сервер для бесплатного хостинга
-        await self.start_health_server()
         
         # Отправляем уведомление о запуске
         await self.send_startup_notification()
@@ -557,27 +511,6 @@ async def main():
     
     monitor = SmartArbitrageMonitor()
     
-    # Запускаем health check сервер только если есть переменная PORT (для Railway/Render)
-    port = os.getenv('PORT')
-    if port:
-        try:
-            port = int(port)
-            app = web.Application()
-            app.router.add_get('/health', health_monitor.health_check)
-            app.router.add_get('/', health_monitor.health_check)
-            
-            runner = web.AppRunner(app)
-            await runner.setup()
-            site = web.TCPSite(runner, '0.0.0.0', port)
-            await site.start()
-            logger.info(f"🌐 Health check сервер запущен на порту {port}")
-        except Exception as e:
-            logger.warning(f"⚠️ Не удалось запустить health check сервер: {e}")
-            runner = None
-    else:
-        logger.info("ℹ️ Переменная PORT не найдена, health check сервер не запускается")
-        runner = None
-    
     # Обработка сигналов для корректного завершения
     def signal_handler(signum, frame):
         logger.info(f"Получен сигнал {signum}")
@@ -604,14 +537,6 @@ async def main():
         logger.info(f"   Уведомлений отправлено: {monitor.stats['notifications_sent']}")
         logger.info(f"   Очищено устаревших: {monitor.stats['expired_opportunities_cleaned']}")
         logger.info("👋 Умный мониторинг завершен")
-        
-        # Останавливаем web сервер если он был запущен
-        if runner:
-            try:
-                await runner.cleanup()
-                logger.info("🛑 Health check сервер остановлен")
-            except Exception as e:
-                logger.warning(f"⚠️ Ошибка остановки сервера: {e}")
 
 if __name__ == "__main__":
     try:
