@@ -2,7 +2,7 @@ services:
   - type: web
     name: smart-arbitrage-monitor
     env: docker
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./Dockerfile.minimal
     plan: free
     region: oregon
     branch: main

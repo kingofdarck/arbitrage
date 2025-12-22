@@ -1,23 +1,21 @@
-# Dockerfile для бесплатного хостинга умного арбитражного монитора
+# Минимальный Dockerfile для бесплатного хостинга (без numpy)
 FROM python:3.9-slim
 
 # Устанавливаем системные зависимости
 RUN apt-get update && apt-get install -y \
-    gcc \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Обновляем pip до последней версии
+# Обновляем pip
 RUN pip install --upgrade pip
 
 # Создаем рабочую директорию
 WORKDIR /app
 
-# Копируем файл зависимостей
-COPY requirements.txt .
-
-# Устанавливаем Python зависимости
-RUN pip install --no-cache-dir -r requirements.txt
+# Устанавливаем только необходимые зависимости
+RUN pip install --no-cache-dir \
+    aiohttp==3.9.1 \
+    requests==2.31.0
 
 # Копируем исходный код
 COPY . .
@@ -29,7 +27,7 @@ RUN mkdir -p /app/logs
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 
-# Открываем порт для health check (Railway/Render автоматически назначают порт)
+# Открываем порт для health check
 EXPOSE 8000
 
 # Health check для контейнера
