@@ -63,6 +63,37 @@ class LiquidityChecker:
             'ATOM': ['COSMOS']
         }
         
+        # Список токенов с частыми проблемами депозитов/выводов
+        self.problematic_tokens = {
+            # Коллапсы и скамы
+            'VRA', 'LUNC', 'USTC', 'FTT', 'SRM', 'RAY', 'FIDA', 'KIN', 'MAPS',
+            'OXY', 'BTTC', 'WIN', 'NFT', 'JST', 'SUN', 'APENFT',
+            
+            # Мем-токены с проблемами
+            'SHIB', 'FLOKI', 'BABYDOGE', 'SAFEMOON', 'ELONGATE', 'HOKK',
+            'KISHU', 'ELON', 'AKITA', 'RYOSHI', 'LEASH', 'BONE',
+            
+            # Токены с техническими проблемами
+            'GALA', 'SAND', 'MANA', 'ENJ', 'CHZ', 'BAT', 'ZIL',
+            'HOT', 'DENT', 'BTT', 'WRX', 'DOGE', 'XVG', 'NPXS',
+            
+            # Токены DeFi с проблемами
+            'CAKE', 'ALPHA', 'XVS', 'SXP', 'HARD', 'KAVA', 'BNX',
+            'TLM', 'ALICE', 'TKO', 'PROS', 'BETA', 'RARE', 'LOKA',
+            
+            # Старые токены с проблемами
+            'XEM', 'WAVES', 'LSK', 'ARDR', 'NXT', 'BURST', 'SC',
+            'DGB', 'RDD', 'DOGE', 'LTC', 'DASH', 'ZEC', 'XMR'
+        }
+        
+        # Надежные токены с высокой ликвидностью
+        self.reliable_tokens = {
+            'BTC', 'ETH', 'BNB', 'ADA', 'SOL', 'MATIC', 'DOT', 'LINK', 'AVAX',
+            'UNI', 'AAVE', 'COMP', 'MKR', 'SNX', 'CRV', 'YFI', 'SUSHI',
+            'ATOM', 'NEAR', 'FTM', 'ALGO', 'VET', 'ICP', 'THETA', 'FIL',
+            'XRP', 'LTC', 'BCH', 'ETC', 'XLM', 'TRX', 'EOS'
+        }
+        
         logger.info("🔍 Инициализирован модуль проверки ликвидности")
 
     async def start_session(self):
@@ -87,32 +118,111 @@ class LiquidityChecker:
         cached_data = self.liquidity_cache[cache_key]
         return datetime.now() - cached_data.last_checked < self.cache_duration
 
-    async def check_binance_liquidity(self, symbol: str) -> Optional[LiquidityStatus]:
-        """Проверка ликвидности на Binance (упрощенная)"""
+    async def get_real_binance_deposit_status(self, base_currency: str) -> Tuple[bool, bool]:
+        """Попытка получить реальный статус депозитов/выводов с Binance"""
         try:
-            # Проверяем что пара торгуется
-            url = f'https://api.binance.com/api/v3/ticker/24hr?symbol={symbol}'
+            # Пробуем получить информацию о монете (может потребовать API ключ)
+            url = 'https://api.binance.com/sapi/v1/capital/config/getall'
             
             async with self.session.get(url) as response:
                 if response.status == 200:
                     data = await response.json()
-                    if data.get('symbol') == symbol:
-                        # Если пара активно торгуется, предполагаем что депозиты/выводы работают
-                        volume = float(data.get('quoteVolume', 0))
-                        confidence = min(1.0, volume / 1000000)  # Уверенность на основе объема
-                        
-                        return LiquidityStatus(
-                            symbol=symbol,
-                            exchange='binance',
-                            deposit_enabled=True,  # Предположение для активных пар
-                            withdraw_enabled=True,  # Предположение для активных пар
-                            deposit_min=0.0,
-                            withdraw_min=0.0,
-                            withdraw_fee=0.0,
-                            network_status='normal' if volume > 100000 else 'limited',
-                            last_checked=datetime.now(),
-                            confidence=confidence
-                        )
+                    
+                    for coin_info in data:
+                        if coin_info.get('coin') == base_currency:
+                            networks = coin_info.get('networkList', [])
+                            
+                            # Ищем хотя бы одну рабочую сеть
+                            deposit_available = False
+                            withdraw_available = False
+                            
+                            for network in networks:
+                                if network.get('depositEnable', False):
+                                    deposit_available = True
+                                if network.get('withdrawEnable', False):
+                                    withdraw_available = True
+                            
+                            logger.info(f"✅ Получен реальный статус {base_currency}: депозит={deposit_available}, вывод={withdraw_available}")
+                            return deposit_available, withdraw_available
+                            
+        except Exception as e:
+            logger.debug(f"Не удалось получить реальный статус для {base_currency}: {e}")
+        
+        # Возвращаем None если не удалось получить данные
+        return None, None
+
+    async def check_binance_liquidity(self, symbol: str) -> Optional[LiquidityStatus]:
+        """Проверка ликвидности на Binance с реальной проверкой депозитов/выводов"""
+        try:
+            # Сначала проверяем что пара торгуется
+            ticker_url = f'https://api.binance.com/api/v3/ticker/24hr?symbol={symbol}'
+            
+            async with self.session.get(ticker_url) as response:
+                if response.status != 200:
+                    return None
+                    
+                ticker_data = await response.json()
+                if ticker_data.get('symbol') != symbol:
+                    return None
+                
+                volume = float(ticker_data.get('quoteVolume', 0))
+                
+                # Получаем базовую валюту из символа
+                base_currency = symbol.replace('USDT', '').replace('USDC', '').replace('BUSD', '').replace('FDUSD', '')
+                
+                # Пытаемся получить реальный статус
+                real_deposit, real_withdraw = await self.get_real_binance_deposit_status(base_currency)
+                
+                # Если получили реальные данные, используем их
+                if real_deposit is not None and real_withdraw is not None:
+                    deposit_enabled = real_deposit
+                    withdraw_enabled = real_withdraw
+                    network_status = 'normal' if (real_deposit and real_withdraw) else 'limited'
+                    confidence = 0.95  # Высокая уверенность в реальных данных
+                else:
+                    # Иначе используем эвристику
+                    deposit_enabled = True
+                    withdraw_enabled = True
+                    network_status = 'normal'
+                    confidence = min(1.0, volume / 1000000)
+                    
+                    # Проблемные токены - консервативная оценка
+                    if base_currency in self.problematic_tokens:
+                        deposit_enabled = False
+                        withdraw_enabled = False
+                        network_status = 'suspended'
+                        confidence = 0.1
+                        logger.info(f"⚠️ {base_currency} в списке проблемных токенов - депозиты/выводы могут быть недоступны")
+                    
+                    # Для малоизвестных токенов снижаем уверенность
+                    elif volume < 10000:  # Очень низкий объем
+                        confidence = 0.3
+                        network_status = 'limited'
+                        deposit_enabled = False  # Консервативно предполагаем что депозиты могут быть отключены
+                        withdraw_enabled = True   # Выводы обычно работают
+                    elif volume < 100000:  # Низкий объем
+                        confidence = 0.5
+                        network_status = 'limited'
+                    
+                    # Для надежных токенов высокая уверенность
+                    elif base_currency in self.reliable_tokens:
+                        confidence = 0.9
+                        deposit_enabled = True
+                        withdraw_enabled = True
+                        network_status = 'normal'
+                
+                return LiquidityStatus(
+                    symbol=symbol,
+                    exchange='binance',
+                    deposit_enabled=deposit_enabled,
+                    withdraw_enabled=withdraw_enabled,
+                    deposit_min=0.0,
+                    withdraw_min=0.0,
+                    withdraw_fee=0.0,
+                    network_status=network_status,
+                    last_checked=datetime.now(),
+                    confidence=confidence
+                )
                         
         except Exception as e:
             logger.warning(f"Ошибка проверки ликвидности Binance для {symbol}: {e}")
@@ -120,7 +230,7 @@ class LiquidityChecker:
         return None
 
     async def check_bybit_liquidity(self, symbol: str) -> Optional[LiquidityStatus]:
-        """Проверка ликвидности на Bybit (упрощенная)"""
+        """Проверка ликвидности на Bybit с учетом проблемных токенов"""
         try:
             # Проверяем что пара торгуется
             url = f'https://api.bybit.com/v5/market/tickers?category=spot&symbol={symbol}'
@@ -131,19 +241,39 @@ class LiquidityChecker:
                     if data.get('retCode') == 0:
                         result = data.get('result', {}).get('list', [])
                         if result and result[0].get('symbol') == symbol:
-                            # Если пара торгуется, предполагаем доступность
                             volume = float(result[0].get('turnover24h', 0))
+                            base_currency = symbol.replace('USDT', '').replace('USDC', '').replace('BUSD', '')
+                            
+                            # Применяем ту же логику что и для Binance
+                            deposit_enabled = True
+                            withdraw_enabled = True
+                            network_status = 'normal'
                             confidence = min(1.0, volume / 500000)
+                            
+                            if base_currency in self.problematic_tokens:
+                                deposit_enabled = False
+                                withdraw_enabled = False
+                                network_status = 'suspended'
+                                confidence = 0.1
+                            elif volume < 5000:
+                                confidence = 0.3
+                                network_status = 'limited'
+                                deposit_enabled = False
+                            elif base_currency in self.reliable_tokens:
+                                confidence = 0.8
+                                deposit_enabled = True
+                                withdraw_enabled = True
+                                network_status = 'normal'
                             
                             return LiquidityStatus(
                                 symbol=symbol,
                                 exchange='bybit',
-                                deposit_enabled=True,
-                                withdraw_enabled=True,
+                                deposit_enabled=deposit_enabled,
+                                withdraw_enabled=withdraw_enabled,
                                 deposit_min=0.0,
                                 withdraw_min=0.0,
                                 withdraw_fee=0.0,
-                                network_status='normal' if volume > 50000 else 'limited',
+                                network_status=network_status,
                                 last_checked=datetime.now(),
                                 confidence=confidence
                             )
@@ -292,27 +422,44 @@ class LiquidityChecker:
         estimated_time = 120  # По умолчанию 2 часа
         
         if buy_liquidity and sell_liquidity:
-            # Проверяем что можно купить на первой бирже и продать на второй
-            can_buy = buy_liquidity.deposit_enabled or symbol.endswith('USDT')  # USDT обычно всегда доступен
-            can_sell = sell_liquidity.withdraw_enabled
+            # Для арбитража КРИТИЧЕСКИ важны депозиты на биржу покупки и выводы с биржи продажи
+            can_deposit_to_buy = buy_liquidity.deposit_enabled
+            can_withdraw_from_sell = sell_liquidity.withdraw_enabled
             
-            if can_buy and can_sell:
+            # Арбитраж возможен только если можно внести на биржу покупки И вывести с биржи продажи
+            if can_deposit_to_buy and can_withdraw_from_sell:
                 is_viable = True
                 
-                # Определяем уровень риска
+                # Определяем уровень риска на основе статусов и уверенности
+                avg_confidence = (buy_liquidity.confidence + sell_liquidity.confidence) / 2
+                
                 if (buy_liquidity.network_status == 'normal' and 
                     sell_liquidity.network_status == 'normal' and
-                    buy_liquidity.confidence > 0.7 and 
-                    sell_liquidity.confidence > 0.7):
+                    avg_confidence > 0.7):
                     risk_level = 'low'
                     estimated_time = 30  # 30 минут для низкого риска
                 elif (buy_liquidity.network_status != 'suspended' and 
-                      sell_liquidity.network_status != 'suspended'):
+                      sell_liquidity.network_status != 'suspended' and
+                      avg_confidence > 0.4):
                     risk_level = 'medium'
                     estimated_time = 60  # 1 час для среднего риска
                 else:
                     risk_level = 'high'
                     estimated_time = 180  # 3 часа для высокого риска
+            else:
+                is_viable = False
+                risk_level = 'high'
+                estimated_time = 999  # Недоступно
+                
+                # Логируем причину недоступности
+                if not can_deposit_to_buy:
+                    logger.debug(f"❌ {symbol}: депозиты заблокированы на {buy_exchange}")
+                if not can_withdraw_from_sell:
+                    logger.debug(f"❌ {symbol}: выводы заблокированы на {sell_exchange}")
+        else:
+            is_viable = False
+            risk_level = 'high'
+            estimated_time = 999
         
         return ArbitrageLiquidity(
             symbol=symbol,
