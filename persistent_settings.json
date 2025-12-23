@@ -1,10 +1,10 @@
 {
   "min_profit": 0.75,
   "check_interval": 5,
-  "cross_exchange_enabled": true,
-  "triangular_enabled": true,
+  "cross_exchange_enabled": false,
+  "triangular_enabled": false,
   "max_notifications": 25,
   "confidence_threshold": 0.1,
-  "monitor_running": true,
-  "last_update": "2025-12-23T16:16:08.945292"
+  "monitor_running": false,
+  "last_update": "2025-12-23T17:07:14.427564"
 }

@@ -17,5 +17,5 @@ COPY . .
 # Переменные окружения
 ENV PYTHONUNBUFFERED=1
 
-# Команда запуска - постоянный бот с кнопками внизу
-CMD ["python", "persistent_bot.py"]
+# Команда запуска - простой надежный бот для деплоя
+CMD ["python", "simple_deployment_bot.py"]
