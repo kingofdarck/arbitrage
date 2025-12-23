@@ -257,7 +257,7 @@ CORRELATION_PAIRS = [
 NOTIFICATION_CONFIG = {
     'telegram': {
         'enabled': True,  # Включаем Telegram
-        'bot_token': '1373836655:AAGjxf5N0j2J4zFrafpHAxVg9s5PWGDHVh0',  # Ваш токен бота
+        'bot_token': '8565304713:AAFpnuNkp4QR6Yk9H-5NoN8l3Z1pN2WigKQ',  # Ваш токен бота
         'chat_id': '884434550',    # Ваш chat_id
     },
     'discord': {
