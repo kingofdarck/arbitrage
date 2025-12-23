@@ -215,9 +215,9 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
 {i}. {confidence_emoji} 🔺 {details['exchange'].upper()}
    💰 Прибыль: {opp.profit_percent:.2f}% | 🎯 {opp.confidence:.0%}
    🔄 Путь: {details['path']}
-   📊 Мин. объем: ${min(details['volumes']):,.0f}
-   💸 Комиссии: {details['total_fees']:.2f}%
-   🧮 Расчет: {details['calculation']}
+   📊 Мин. объем: ${details['volume']:,.0f}
+   💸 Комиссии: {details.get('total_fees', 0.3):.2f}%
+   🧮 Расчет: {details.get('calculation', 'Треугольный арбитраж')}
 """
         
         return message.strip()

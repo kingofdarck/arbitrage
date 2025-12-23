@@ -645,7 +645,9 @@ class EnhancedArbitrageMonitor:
                             'pairs': [p1.symbol, p3.symbol, p2.symbol],
                             'prices': [price1, price3, price2],
                             'volume': min_volume,
-                            'direction': 'forward'
+                            'direction': 'forward',
+                            'total_fees': fee * 3 * 100,
+                            'calculation': f"1 → {1/price1:.6f} → {(1/price1)*price3:.6f} → {forward_result:.6f}"
                         },
                         timestamp=datetime.now(),
                         confidence=confidence
@@ -661,7 +663,9 @@ class EnhancedArbitrageMonitor:
                             'pairs': [p2.symbol, p3.symbol, p1.symbol],
                             'prices': [price2, 1/price3, price1],
                             'volume': min_volume,
-                            'direction': 'reverse'
+                            'direction': 'reverse',
+                            'total_fees': fee * 3 * 100,
+                            'calculation': f"1 → {1/price2:.6f} → {(1/price2)*(1/price3):.6f} → {reverse_result:.6f}"
                         },
                         timestamp=datetime.now(),
                         confidence=confidence

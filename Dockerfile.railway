@@ -17,5 +17,5 @@ COPY . .
 # Переменные окружения
 ENV PYTHONUNBUFFERED=1
 
-# Команда запуска - принудительный бот (меню на любое сообщение)
-CMD ["python", "force_menu_bot.py"]
+# Команда запуска - постоянный бот с кнопками внизу
+CMD ["python", "persistent_bot.py"]
