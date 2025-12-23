@@ -672,32 +672,6 @@ class EnhancedArbitrageMonitor:
                 continue
         
         return sorted(opportunities, key=lambda x: x.profit_percent, reverse=True)
-                confidence = min(1.0, min_volume / 50000)
-                
-                # Проверяем прибыльность прямого направления
-                if forward_profit > self.min_profit_threshold:
-                    opportunity = ArbitrageOpportunity(
-                        type='triangular',
-                        profit_percent=forward_profit,
-                        confidence=confidence,
-                        details={
-                            'exchange': exchange,
-                            'direction': 'forward',
-                            'path': f"{quote} -> {base} -> {intermediate} -> {quote}",
-                            'pairs': [pair1_key, pair3_key, pair2_key],
-                            'prices': [pair1.price, pair3.price, pair2.price],
-                            'volumes': [pair1.volume_24h, pair3.volume_24h, pair2.volume_24h],
-                            'calculation': f"1 / {pair1.price:.6f} * {pair3.price:.6f} * {pair2.price:.6f} = {forward_result:.6f}",
-                            'fee_per_trade': fee * 100,
-                            'total_fees': fee * 3 * 100
-                        },
-                        timestamp=datetime.now()
-                    )
-                    opportunities.append(opportunity)
-                
-                # Проверяем прибыльность обратного направления
-                if reverse_profit > self.min_profit_threshold:
-                    opportunity = ArbitrageOpportunity(
                         type='triangular',
                         profit_percent=reverse_profit,
                         confidence=confidence,
