@@ -88,7 +88,7 @@ PAIR_FILTERS = {
 # Белый список отключен для максимального покрытия
 WHITELIST_PAIRS = []  # Пустой список = мониторим все доступные пары
 
-# Настройки арбитража - СНИЖАЕМ пороги для большего количества сигналов
+# Настройки арбитража - ТОЛЬКО межбиржевой и треугольный
 ARBITRAGE_CONFIG = {
     'cross_exchange': {
         'enabled': True,
@@ -100,44 +100,45 @@ ARBITRAGE_CONFIG = {
         'min_profit': 0.75,  # Остается 0.75%
         'min_confidence': 0.1  # Снижено с 0.3 до 0.1
     },
+    # ОТКЛЮЧАЕМ остальные типы арбитража
     'statistical': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.2,  # Снижено с 0.5 до 0.2
-        'correlation_threshold': 0.6,  # Снижено с 0.8 до 0.6
-        'z_score_threshold': 1.5  # Снижено с 2.0 до 1.5
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.2,
+        'correlation_threshold': 0.6,
+        'z_score_threshold': 1.5
     },
     'temporal': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.1,  # Снижено с 0.2 до 0.1
-        'max_time_lag': 120  # Увеличено с 60 до 120 секунд
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.1,
+        'max_time_lag': 120
     },
     'spread': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.2  # Снижено с 0.4 до 0.2
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.2
     },
     'liquidity': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.3,  # Снижено с 0.6 до 0.3
-        'min_volume': 500  # Снижено с 1000 до 500 USD
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.3,
+        'min_volume': 500
     },
     'index': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.2  # Снижено с 0.4 до 0.2
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.2
     },
     'staking': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.3  # Снижено с 0.6 до 0.3
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.3
     },
     'funding': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.4  # Снижено с 0.7 до 0.4
+        'enabled': False,
+        'min_profit': 0.75,
+        'min_confidence': 0.4
     }
 }
 

@@ -17,5 +17,5 @@ COPY . .
 # Переменные окружения
 ENV PYTHONUNBUFFERED=1
 
-# Команда запуска
-CMD ["python", "smart_arbitrage_monitor.py"]
+# Команда запуска - комбинированная система (монитор + бот)
+CMD ["python", "combined_monitor.py"]
