@@ -1,0 +1,10 @@
+{
+  "min_profit": 0.75,
+  "check_interval": 5,
+  "cross_exchange_enabled": true,
+  "triangular_enabled": true,
+  "max_notifications": 25,
+  "confidence_threshold": 0.1,
+  "monitor_running": true,
+  "last_update": "2025-12-23T16:16:08.945292"
+}

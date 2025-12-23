@@ -31,6 +31,7 @@ default_settings = {
     'triangular_enabled': True,
     'max_notifications': 25,
     'confidence_threshold': 0.1,
+    'check_liquidity': True,  # Проверка ликвидности
     'monitor_running': False,
     'last_update': datetime.now().isoformat()
 }
@@ -108,6 +109,7 @@ async def show_welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 • Интервал проверки: {settings['check_interval']} сек
 • Межбиржевой арбитраж: {'✅' if settings['cross_exchange_enabled'] else '❌'}
 • Треугольный арбитраж: {'✅' if settings['triangular_enabled'] else '❌'}
+• Проверка ликвидности: {'✅' if settings['check_liquidity'] else '❌'}
 • Статус: {'🟢 Работает' if settings['monitor_running'] else '🔴 Остановлен'}
 
 💡 **Используйте кнопки внизу для управления**
@@ -136,6 +138,7 @@ async def show_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
 • Интервал проверки: {settings['check_interval']} сек
 • Межбиржевой арбитраж: {'✅' if settings['cross_exchange_enabled'] else '❌'}
 • Треугольный арбитраж: {'✅' if settings['triangular_enabled'] else '❌'}
+• Проверка ликвидности: {'✅' if settings['check_liquidity'] else '❌'}
 • Макс. уведомлений: {settings['max_notifications']}
 • Порог уверенности: {settings['confidence_threshold']}
 
@@ -184,6 +187,7 @@ async def show_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ⏱️ **Интервал проверки** - частота сканирования  
 🔄 **Межбиржевой арбитраж** - поиск между биржами
 🔺 **Треугольный арбитраж** - поиск внутри биржи
+💧 **Проверка ликвидности** - депозиты/выводы
 📱 **Макс. уведомлений** - лимит за цикл
 🎯 **Порог уверенности** - фильтр качества
 
@@ -342,6 +346,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         settings['triangular_enabled'] = not settings['triangular_enabled']
         await update_settings_menu(query)
         
+    elif query.data == "toggle_liquidity":
+        settings['check_liquidity'] = not settings['check_liquidity']
+        await update_settings_menu(query)
+        
     elif query.data == "save_settings":
         save_settings(settings)
         await query.edit_message_text(
@@ -383,6 +391,7 @@ async def update_settings_menu(query):
 ⏱️ Интервал: {settings['check_interval']}с
 🔄 Межбиржевой: {'✅' if settings['cross_exchange_enabled'] else '❌'}
 🔺 Треугольный: {'✅' if settings['triangular_enabled'] else '❌'}
+💧 Ликвидность: {'✅' if settings['check_liquidity'] else '❌'}
 📱 Уведомлений: {settings['max_notifications']}
 🎯 Уверенность: {settings['confidence_threshold']}
     """

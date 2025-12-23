@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from enhanced_arbitrage_monitor import EnhancedArbitrageMonitor, ArbitrageOpportunity
 from config import MONITORING_CONFIG, NOTIFICATION_CONFIG
 from notifications import NotificationService
+from liquidity_checker import LiquidityChecker
 import logging
 
 # Настройка логирования
@@ -67,6 +68,10 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
         self.tracked_opportunities: Dict[str, TrackedOpportunity] = {}
         self.opportunity_expiry_hours = 1  # СНИЖЕНО с 2 до 1 часа для более частых повторов
         
+        # Проверка ликвидности
+        self.liquidity_checker = LiquidityChecker()
+        self.check_liquidity = MONITORING_CONFIG.get('check_liquidity', True)  # Из конфига
+        
         # Статистика
         self.stats = {
             'total_cycles': 0,
@@ -75,6 +80,9 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
             'notifications_sent': 0,
             'duplicate_opportunities_filtered': 0,
             'expired_opportunities_cleaned': 0,
+            'liquidity_checks': 0,
+            'viable_opportunities': 0,
+            'blocked_by_liquidity': 0,
             'start_time': datetime.now(),
             'last_notification_time': None
         }
@@ -88,6 +96,7 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
         logger.info(f"📱 Раздельные уведомления для каждого типа арбитража")
         logger.info(f"🌐 Мониторинг ВСЕХ доступных торговых пар (без белого списка)")
         logger.info(f"🔺 Треугольный арбитраж: ВСЕ возможные комбинации валют")
+        logger.info(f"💧 Проверка ликвидности: {'✅ ВКЛЮЧЕНА' if self.check_liquidity else '❌ ОТКЛЮЧЕНА'}")
 
     def generate_opportunity_hash(self, opportunity: ArbitrageOpportunity) -> str:
         """Генерация хеша для идентификации возможности"""
@@ -185,6 +194,9 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
             symbol = details['symbol']
             crypto_emoji = "₿" if symbol.startswith('BTC') else "Ξ" if symbol.startswith('ETH') else "🪙"
             
+            # Информация о ликвидности
+            liquidity_info = details.get('liquidity_info', 'Не проверено')
+            
             message += f"""
 {i}. {confidence_emoji} {crypto_emoji} {symbol}
    💰 Прибыль: {opp.profit_percent:.2f}% | 🎯 {opp.confidence:.0%}
@@ -192,6 +204,7 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
    📉 ПРОДАТЬ: {details['sell_exchange'].upper()} ${details['sell_price']:.6f}
    📊 Объемы: ${details['buy_volume_24h']:,.0f} / ${details['sell_volume_24h']:,.0f}
    💸 Комиссии: {details['fees']['total']:.2f}%
+   💧 Ликвидность: {liquidity_info}
 """
         
         return message.strip()
@@ -304,9 +317,65 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
         except Exception as e:
             logger.error(f"❌ Ошибка отправки уведомления: {e}")
 
+    async def check_opportunities_liquidity(self, opportunities: List[ArbitrageOpportunity]) -> List[ArbitrageOpportunity]:
+        """Проверка ликвидности для арбитражных возможностей"""
+        if not self.check_liquidity or not opportunities:
+            return opportunities
+        
+        viable_opportunities = []
+        
+        for opp in opportunities:
+            try:
+                if opp.type == 'cross_exchange':
+                    details = opp.details
+                    symbol = details['symbol']
+                    buy_exchange = details['buy_exchange']
+                    sell_exchange = details['sell_exchange']
+                    
+                    # Проверяем ликвидность
+                    liquidity = await self.liquidity_checker.check_arbitrage_liquidity(
+                        symbol, buy_exchange, sell_exchange
+                    )
+                    
+                    self.stats['liquidity_checks'] += 1
+                    
+                    if liquidity.is_viable:
+                        # Добавляем информацию о ликвидности в детали
+                        details['liquidity_info'] = self.liquidity_checker.format_liquidity_info(liquidity)
+                        details['liquidity_risk'] = liquidity.risk_level
+                        details['estimated_time'] = liquidity.estimated_time
+                        
+                        # Корректируем уверенность на основе ликвидности
+                        if liquidity.risk_level == 'low':
+                            opp.confidence = min(1.0, opp.confidence * 1.2)
+                        elif liquidity.risk_level == 'medium':
+                            opp.confidence = opp.confidence * 1.0
+                        else:  # high risk
+                            opp.confidence = opp.confidence * 0.8
+                        
+                        viable_opportunities.append(opp)
+                        self.stats['viable_opportunities'] += 1
+                    else:
+                        self.stats['blocked_by_liquidity'] += 1
+                        logger.debug(f"❌ Заблокировано ликвидностью: {symbol} ({buy_exchange} → {sell_exchange})")
+                else:
+                    # Для треугольного арбитража пока не проверяем ликвидность
+                    viable_opportunities.append(opp)
+                    
+            except Exception as e:
+                logger.warning(f"Ошибка проверки ликвидности для {opp.type}: {e}")
+                # В случае ошибки оставляем возможность
+                viable_opportunities.append(opp)
+        
+        return viable_opportunities
+
     async def run(self, check_interval: int = 10):
         """Запуск монитора с поддержкой бесплатного хостинга"""
         await self.start_session()
+        
+        # Запускаем сессию для проверки ликвидности
+        if self.check_liquidity:
+            await self.liquidity_checker.start_session()
         
         # Отправляем уведомление о запуске
         await self.send_startup_notification()
@@ -315,6 +384,8 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
             await self.monitor_loop(check_interval)
         finally:
             await self.close_session()
+            if self.check_liquidity:
+                await self.liquidity_checker.close_session()
 
     async def monitor_loop(self, check_interval: int = 10):
         """Основной цикл умного мониторинга"""
@@ -356,6 +427,10 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
                     opp for opp in all_opportunities 
                     if opp.confidence >= self.min_confidence
                 ]
+                
+                # Проверяем ликвидность для межбиржевых возможностей
+                if self.check_liquidity:
+                    filtered_opportunities = await self.check_opportunities_liquidity(filtered_opportunities)
                 
                 # Сортируем по взвешенной прибыли
                 filtered_opportunities.sort(
@@ -434,6 +509,16 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
                     logger.info(f"   Уведомлений отправлено: {self.stats['notifications_sent']}")
                     logger.info(f"   Среднее за цикл: {avg_opportunities:.1f}")
                     logger.info(f"   Отслеживается возможностей: {len(self.tracked_opportunities)}")
+                    
+                    if self.check_liquidity:
+                        logger.info(f"   💧 ЛИКВИДНОСТЬ:")
+                        logger.info(f"      Проверок: {self.stats['liquidity_checks']}")
+                        logger.info(f"      Доступных: {self.stats['viable_opportunities']}")
+                        logger.info(f"      Заблокировано: {self.stats['blocked_by_liquidity']}")
+                        
+                        if self.stats['liquidity_checks'] > 0:
+                            viability_rate = (self.stats['viable_opportunities'] / self.stats['liquidity_checks']) * 100
+                            logger.info(f"      Процент доступности: {viability_rate:.1f}%")
                 
                 # Пауза перед следующим циклом
                 await asyncio.sleep(check_interval)
@@ -483,6 +568,13 @@ async def main():
         logger.info(f"   Дубликатов отфильтровано: {monitor.stats['duplicate_opportunities_filtered']}")
         logger.info(f"   Уведомлений отправлено: {monitor.stats['notifications_sent']}")
         logger.info(f"   Очищено устаревших: {monitor.stats['expired_opportunities_cleaned']}")
+        
+        if monitor.check_liquidity:
+            logger.info(f"   💧 ЛИКВИДНОСТЬ:")
+            logger.info(f"      Проверок: {monitor.stats['liquidity_checks']}")
+            logger.info(f"      Доступных: {monitor.stats['viable_opportunities']}")
+            logger.info(f"      Заблокировано: {monitor.stats['blocked_by_liquidity']}")
+            
         logger.info("👋 Умный мониторинг завершен")
 
 if __name__ == "__main__":
