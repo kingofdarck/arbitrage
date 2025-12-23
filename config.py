@@ -2,184 +2,181 @@
 Конфигурационный файл для арбитражного монитора
 """
 
-# Настройки мониторинга
+# Настройки мониторинга - АГРЕССИВНЫЕ для максимального покрытия
 MONITORING_CONFIG = {
-    'check_interval': 10,  # Интервал проверки в секундах
-    'min_profit_threshold': 0.75,  # Минимальная прибыль в % (повышено до 0.75%)
-    'max_opportunities_per_notification': 15,  # Максимум возможностей в одном уведомлении
+    'check_interval': 5,  # Проверка каждые 5 секунд (было 10)
+    'min_profit_threshold': 0.75,  # Минимальная прибыль остается 0.75%
+    'max_opportunities_per_notification': 25,  # Больше возможностей в уведомлении (было 15)
 }
 
-# Настройки бирж
+# Настройки бирж - СНИЖЕНЫ требования для большего покрытия
 EXCHANGES = {
     'binance': {
         'name': 'Binance',
         'api_url': 'https://api.binance.com/api/v3/ticker/price',
         'fee': 0.1,  # Комиссия в %
         'enabled': True,
-        'min_volume': 100000  # Минимальный объем торгов за 24ч в USDT
+        'min_volume': 10000  # Снижено с 100k до 10k
     },
     'bybit': {
         'name': 'Bybit',
         'api_url': 'https://api.bybit.com/v5/market/tickers',
         'fee': 0.1,
         'enabled': True,
-        'min_volume': 50000
+        'min_volume': 5000  # Снижено с 50k до 5k
     },
     'okx': {
         'name': 'OKX',
         'api_url': 'https://www.okx.com/api/v5/market/tickers',
         'fee': 0.1,
         'enabled': True,
-        'min_volume': 50000
+        'min_volume': 5000  # Снижено с 50k до 5k
     },
     'kucoin': {
         'name': 'KuCoin', 
         'api_url': 'https://api.kucoin.com/api/v1/market/allTickers',
         'fee': 0.1,
         'enabled': True,
-        'min_volume': 30000
+        'min_volume': 3000  # Снижено с 30k до 3k
     },
     'mexc': {
         'name': 'MEXC',
         'api_url': 'https://api.mexc.com/api/v3/ticker/24hr',
         'fee': 0.2,
         'enabled': True,
-        'min_volume': 20000
+        'min_volume': 2000  # Снижено с 20k до 2k
     },
     'bitget': {
         'name': 'Bitget',
         'api_url': 'https://api.bitget.com/api/spot/v1/market/tickers',
         'fee': 0.1,
         'enabled': True,
-        'min_volume': 20000
+        'min_volume': 2000  # Снижено с 20k до 2k
     },
     'coinbase': {
         'name': 'Coinbase Pro',
         'api_url': 'https://api.exchange.coinbase.com/products/stats',
         'fee': 0.5,
-        'enabled': False,  # Отключаем пока
-        'min_volume': 100000
+        'enabled': True,  # ВКЛЮЧАЕМ для большего покрытия
+        'min_volume': 10000  # Снижено с 100k до 10k
     },
     'kraken': {
         'name': 'Kraken',
         'api_url': 'https://api.kraken.com/0/public/Ticker',
         'fee': 0.26,
-        'enabled': False,  # Отключаем пока
-        'min_volume': 50000
+        'enabled': True,  # ВКЛЮЧАЕМ для большего покрытия
+        'min_volume': 5000  # Снижено с 50k до 5k
     }
 }
 
-# Торговые пары для мониторинга - теперь динамически получаем все доступные
-TRADING_PAIRS = []  # Будет заполняться автоматически
+# Торговые пары для мониторинга - УБИРАЕМ ОГРАНИЧЕНИЯ, мониторим ВСЕ
+TRADING_PAIRS = []  # Будет заполняться автоматически ВСЕМИ доступными парами
 
-# Базовые валюты для фильтрации (основные стейблкоины и топ криптовалюты)
-BASE_CURRENCIES = ['USDT', 'USDC', 'BUSD', 'DAI', 'BTC', 'ETH', 'BNB']
+# Базовые валюты для фильтрации - РАСШИРЯЕМ список
+BASE_CURRENCIES = ['USDT', 'USDC', 'BUSD', 'DAI', 'BTC', 'ETH', 'BNB', 'FDUSD', 'TUSD', 'USDD']
 
-# Минимальные требования для включения пары в мониторинг
+# Минимальные требования для включения пары в мониторинг - СНИЖАЕМ для большего покрытия
 PAIR_FILTERS = {
-    'min_volume_24h': 50000,       # Минимальный объем торгов за 24ч в USD (снижено до $50k)
-    'min_price': 0.00001,          # Минимальная цена (исключаем токены по $0.000001)
-    'max_price': 1000000,          # Максимальная цена
-    'exclude_patterns': ['UP', 'DOWN', 'BEAR', 'BULL', '3L', '3S', 'HEDGE'],  # Исключаем левереджные токены
-    'max_profit_threshold': 50.0,  # Максимальная прибыль для фильтрации скамов (50%)
+    'min_volume_24h': 1000,        # Снижено с 50k до 1k USD
+    'min_price': 0.000001,         # Снижено для включения мелких токенов
+    'max_price': 10000000,         # Увеличено
+    'exclude_patterns': ['UP', 'DOWN', 'BEAR', 'BULL'],  # Убираем часть исключений
+    'max_profit_threshold': 100.0, # Увеличено с 50% до 100% для включения больше возможностей
 }
 
-# Белый список - только проверенные топ криптовалюты
-WHITELIST_PAIRS = [
-    # Топ-20 по капитализации
-    'BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'XRPUSDT', 'SOLUSDT',
-    'ADAUSDT', 'DOGEUSDT', 'AVAXUSDT', 'TRXUSDT', 'LINKUSDT',
-    'DOTUSDT', 'MATICUSDT', 'LTCUSDT', 'SHIBUSDT', 'UNIUSDT',
-    'ATOMUSDT', 'ETCUSDT', 'XLMUSDT', 'BCHUSDT', 'FILUSDT',
-    
-    # Популярные DeFi токены
-    'AAVEUSDT', 'MKRUSDT', 'COMPUSDT', 'YFIUSDT', 'SUSHIUSDT',
-    'CRVUSDT', 'BALUSDT', 'SNXUSDT', 'RENUSDT', 'KNCUSDT',
-    
-    # Стейблкоины
-    'USDCUSDT', 'BUSDUSDT', 'DAIUSDT', 'TUSDUSDT',
-    
-    # Кросс-пары с BTC
-    'ETHBTC', 'BNBBTC', 'ADABTC', 'DOTBTC', 'LINKBTC',
-    'LTCBTC', 'XRPBTC', 'SOLBTC', 'AVAXBTC', 'MATICBTC',
-    
-    # Кросс-пары с ETH  
-    'BNBETH', 'ADAETH', 'DOTETH', 'LINKETH', 'LTCETH',
-    'XRPETH', 'SOLETH', 'AVAXETH', 'MATICETH', 'UNIETH',
-]
+# УБИРАЕМ белый список - мониторим ВСЕ пары, которые проходят фильтры
+# Белый список отключен для максимального покрытия
+WHITELIST_PAIRS = []  # Пустой список = мониторим все доступные пары
 
-# Настройки арбитража
+# Настройки арбитража - СНИЖАЕМ пороги для большего количества сигналов
 ARBITRAGE_CONFIG = {
     'cross_exchange': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.3
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.1  # Снижено с 0.3 до 0.1
     },
     'triangular': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.3
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.1  # Снижено с 0.3 до 0.1
     },
     'statistical': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.5,
-        'correlation_threshold': 0.8,
-        'z_score_threshold': 2.0
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.2,  # Снижено с 0.5 до 0.2
+        'correlation_threshold': 0.6,  # Снижено с 0.8 до 0.6
+        'z_score_threshold': 1.5  # Снижено с 2.0 до 1.5
     },
     'temporal': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.2,
-        'max_time_lag': 60  # секунды
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.1,  # Снижено с 0.2 до 0.1
+        'max_time_lag': 120  # Увеличено с 60 до 120 секунд
     },
     'spread': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.4
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.2  # Снижено с 0.4 до 0.2
     },
     'liquidity': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.6,
-        'min_volume': 1000  # USD
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.3,  # Снижено с 0.6 до 0.3
+        'min_volume': 500  # Снижено с 1000 до 500 USD
     },
     'index': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.4
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.2  # Снижено с 0.4 до 0.2
     },
     'staking': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.6
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.3  # Снижено с 0.6 до 0.3
     },
     'funding': {
         'enabled': True,
-        'min_profit': 0.75,  # Повышено до 0.75%
-        'min_confidence': 0.7
+        'min_profit': 0.75,  # Остается 0.75%
+        'min_confidence': 0.4  # Снижено с 0.7 до 0.4
     }
 }
 
-# Треугольные наборы - расширенный список для всех основных валют
-TRIANGULAR_SETS = [
-    # Основные с USDT
-    ('BTC', 'ETH', 'USDT'), ('BTC', 'BNB', 'USDT'), ('ETH', 'BNB', 'USDT'),
-    ('BTC', 'ADA', 'USDT'), ('ETH', 'ADA', 'USDT'), ('BNB', 'ADA', 'USDT'),
-    ('BTC', 'SOL', 'USDT'), ('ETH', 'SOL', 'USDT'), ('BNB', 'SOL', 'USDT'),
-    ('BTC', 'MATIC', 'USDT'), ('ETH', 'MATIC', 'USDT'), ('BNB', 'MATIC', 'USDT'),
-    ('BTC', 'DOT', 'USDT'), ('ETH', 'DOT', 'USDT'), ('BNB', 'DOT', 'USDT'),
-    ('BTC', 'LINK', 'USDT'), ('ETH', 'LINK', 'USDT'), ('BNB', 'LINK', 'USDT'),
-    ('BTC', 'AVAX', 'USDT'), ('ETH', 'AVAX', 'USDT'), ('BNB', 'AVAX', 'USDT'),
-    ('BTC', 'UNI', 'USDT'), ('ETH', 'UNI', 'USDT'), ('BNB', 'UNI', 'USDT'),
+# Треугольные наборы - АВТОМАТИЧЕСКАЯ ГЕНЕРАЦИЯ всех возможных комбинаций
+# Будет заполняться динамически из всех доступных валют
+TRIANGULAR_SETS = []  # Будет генерироваться автоматически
+
+# Функция для генерации всех треугольных комбинаций
+def generate_all_triangular_sets(available_currencies):
+    """Генерирует все возможные треугольные комбинации из доступных валют"""
+    triangular_sets = []
+    currencies = list(available_currencies)
     
-    # С USDC
-    ('BTC', 'ETH', 'USDC'), ('BTC', 'BNB', 'USDC'), ('ETH', 'BNB', 'USDC'),
-    ('BTC', 'SOL', 'USDC'), ('ETH', 'SOL', 'USDC'), ('BNB', 'SOL', 'USDC'),
+    # Генерируем все комбинации из 3 валют
+    for i in range(len(currencies)):
+        for j in range(i + 1, len(currencies)):
+            for k in range(j + 1, len(currencies)):
+                # Добавляем все возможные перестановки
+                triangular_sets.extend([
+                    (currencies[i], currencies[j], currencies[k]),
+                    (currencies[i], currencies[k], currencies[j]),
+                    (currencies[j], currencies[i], currencies[k]),
+                    (currencies[j], currencies[k], currencies[i]),
+                    (currencies[k], currencies[i], currencies[j]),
+                    (currencies[k], currencies[j], currencies[i])
+                ])
     
-    # Между топ криптовалютами
-    ('BTC', 'ETH', 'BNB'), ('SOL', 'ADA', 'BTC'), ('ETH', 'SOL', 'BNB'),
-    ('MATIC', 'DOT', 'ETH'), ('LINK', 'UNI', 'BTC'), ('AVAX', 'SOL', 'ETH'),
+    # Убираем дубликаты
+    return list(set(triangular_sets))
+
+# Основные валюты для треугольного арбитража (будет расширяться автоматически)
+TRIANGULAR_BASE_CURRENCIES = [
+    'BTC', 'ETH', 'BNB', 'USDT', 'USDC', 'BUSD', 'DAI',
+    'ADA', 'SOL', 'MATIC', 'DOT', 'LINK', 'AVAX', 'UNI',
+    'XRP', 'LTC', 'BCH', 'ETC', 'ATOM', 'NEAR', 'FTM',
+    'ALGO', 'VET', 'ICP', 'THETA', 'FIL', 'TRX', 'EOS',
+    'XLM', 'AAVE', 'MKR', 'COMP', 'YFI', 'SUSHI', 'CRV',
+    'SNX', 'BAL', 'REN', 'KNC', 'LRC', 'ZRX', 'BAND',
+    'STORJ', 'BAT', 'ENJ', 'MANA', 'SAND', 'AXS', 'GALA'
 ]
 
 # Индексные токены и их составляющие

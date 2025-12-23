@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Dict, List, Tuple, Optional, Set
 from dataclasses import dataclass
 import logging
-from config import EXCHANGES, TRIANGULAR_SETS, PAIR_FILTERS, BASE_CURRENCIES
+from config import EXCHANGES, TRIANGULAR_SETS, PAIR_FILTERS, BASE_CURRENCIES, TRIANGULAR_BASE_CURRENCIES, generate_all_triangular_sets
 
 logger = logging.getLogger(__name__)
 
@@ -40,8 +40,10 @@ class EnhancedArbitrageMonitor:
         self.session = None
         self.all_pairs = {}  # {exchange: {symbol: TradingPair}}
         self.normalized_pairs = {}  # {normalized_symbol: {exchange: TradingPair}}
-        self.min_profit_threshold = 0.75  # Повышено до 0.75% для всех поисков
+        self.min_profit_threshold = 0.75  # Остается 0.75%
         self.last_update = {}  # Время последнего обновления для каждой биржи
+        self.available_currencies = set()  # Все доступные валюты
+        self.triangular_sets = []  # Будет генерироваться автоматически
         
         # Активные биржи
         self.active_exchanges = {
@@ -49,7 +51,9 @@ class EnhancedArbitrageMonitor:
             if config['enabled']
         }
         
-        logger.info(f"Инициализирован монитор с {len(self.active_exchanges)} биржами")
+        logger.info(f"🚀 Инициализирован АГРЕССИВНЫЙ монитор с {len(self.active_exchanges)} биржами")
+        logger.info(f"📊 Мониторинг ВСЕХ доступных торговых пар (без белого списка)")
+        logger.info(f"🔺 Треугольный арбитраж: ВСЕ возможные комбинации валют")
 
     async def start_session(self):
         """Инициализация HTTP сессии с таймаутами"""
@@ -429,26 +433,27 @@ class EnhancedArbitrageMonitor:
         logger.info(f"Всего получено {total_pairs} торговых пар с {len(self.all_pairs)} бирж")
 
     def normalize_all_pairs(self):
-        """Нормализация всех пар для поиска арбитража с фильтрацией"""
+        """Нормализация всех пар для поиска арбитража - АГРЕССИВНАЯ версия"""
         from config import WHITELIST_PAIRS, PAIR_FILTERS
         
         self.normalized_pairs = {}
+        self.available_currencies = set()
         
         for exchange, pairs in self.all_pairs.items():
             for symbol, pair_data in pairs.items():
                 normalized_symbol = self.normalize_symbol(symbol)
                 
-                # Фильтрация по белому списку
-                if normalized_symbol not in WHITELIST_PAIRS:
-                    continue
+                # УБИРАЕМ фильтрацию по белому списку - мониторим ВСЕ пары
+                # if normalized_symbol not in WHITELIST_PAIRS:
+                #     continue
                 
-                # Дополнительная фильтрация по объему и цене
+                # Более мягкая фильтрация - только критические исключения
                 if (pair_data.volume_24h < PAIR_FILTERS['min_volume_24h'] or
                     pair_data.price < PAIR_FILTERS['min_price'] or
                     pair_data.price > PAIR_FILTERS['max_price']):
                     continue
                 
-                # Исключаем токены с подозрительными паттернами в названии
+                # Исключаем только явно левереджные токены
                 if any(pattern in symbol.upper() for pattern in PAIR_FILTERS['exclude_patterns']):
                     continue
                 
@@ -456,6 +461,59 @@ class EnhancedArbitrageMonitor:
                     self.normalized_pairs[normalized_symbol] = {}
                 
                 self.normalized_pairs[normalized_symbol][exchange] = pair_data
+                
+                # Добавляем валюты в список для треугольного арбитража
+                base, quote = self.parse_symbol(symbol)
+                self.available_currencies.add(base)
+                self.available_currencies.add(quote)
+        
+        # Генерируем ВСЕ возможные треугольные комбинации
+        self.generate_triangular_combinations()
+        
+        logger.info(f"📊 Нормализовано {len(self.normalized_pairs)} торговых пар")
+        logger.info(f"💱 Найдено {len(self.available_currencies)} уникальных валют")
+        logger.info(f"🔺 Сгенерировано {len(self.triangular_sets)} треугольных комбинаций")
+
+    def generate_triangular_combinations(self):
+        """Генерация ВСЕХ возможных треугольных комбинаций"""
+        # Используем основные валюты + все найденные валюты
+        all_currencies = TRIANGULAR_BASE_CURRENCIES.copy()
+        
+        # Добавляем все найденные валюты (ограничиваем топ-100 по объему)
+        currency_volumes = {}
+        for symbol, exchanges in self.normalized_pairs.items():
+            base, quote = self.parse_symbol(symbol)
+            for exchange, pair_data in exchanges.items():
+                if base not in currency_volumes:
+                    currency_volumes[base] = 0
+                if quote not in currency_volumes:
+                    currency_volumes[quote] = 0
+                currency_volumes[base] += pair_data.volume_24h
+                currency_volumes[quote] += pair_data.volume_24h
+        
+        # Берем топ-50 валют по объему
+        top_currencies = sorted(currency_volumes.items(), key=lambda x: x[1], reverse=True)[:50]
+        for currency, _ in top_currencies:
+            if currency not in all_currencies:
+                all_currencies.append(currency)
+        
+        # Генерируем треугольные комбинации
+        self.triangular_sets = []
+        currencies = list(set(all_currencies))
+        
+        # Генерируем комбинации из 3 валют
+        for i in range(len(currencies)):
+            for j in range(i + 1, len(currencies)):
+                for k in range(j + 1, len(currencies)):
+                    # Добавляем основные перестановки
+                    self.triangular_sets.extend([
+                        (currencies[i], currencies[j], currencies[k]),
+                        (currencies[i], currencies[k], currencies[j]),
+                        (currencies[j], currencies[i], currencies[k])
+                    ])
+        
+        # Убираем дубликаты
+        self.triangular_sets = list(set(self.triangular_sets))
 
     def find_cross_exchange_arbitrage(self) -> List[ArbitrageOpportunity]:
         """Поиск межбиржевого арбитража для всех пар с фильтрацией"""
@@ -517,7 +575,7 @@ class EnhancedArbitrageMonitor:
         return sorted(opportunities, key=lambda x: x.profit_percent, reverse=True)
 
     def find_triangular_arbitrage(self, exchange: str) -> List[ArbitrageOpportunity]:
-        """Поиск треугольного арбитража на одной бирже"""
+        """Поиск треугольного арбитража на одной бирже - АГРЕССИВНАЯ версия"""
         opportunities = []
         
         if exchange not in self.all_pairs:
@@ -531,35 +589,89 @@ class EnhancedArbitrageMonitor:
             key = f"{pair_data.base_asset}{pair_data.quote_asset}"
             pair_index[key] = pair_data
         
-        for base, intermediate, quote in TRIANGULAR_SETS:
+        # Используем СГЕНЕРИРОВАННЫЕ треугольные комбинации вместо статичного списка
+        for base, intermediate, quote in self.triangular_sets:
             # Формируем ключи для поиска пар
             pair1_key = f"{base}{quote}"      # BTC/USDT
             pair2_key = f"{intermediate}{quote}"  # ETH/USDT  
             pair3_key = f"{base}{intermediate}"   # BTC/ETH
             
-            # Проверяем наличие всех необходимых пар
-            if all(key in pair_index for key in [pair1_key, pair2_key, pair3_key]):
-                pair1 = pair_index[pair1_key]  # BTC/USDT
-                pair2 = pair_index[pair2_key]  # ETH/USDT
-                pair3 = pair_index[pair3_key]  # BTC/ETH
+            # Также проверяем обратные пары
+            pair1_rev = f"{quote}{base}"
+            pair2_rev = f"{quote}{intermediate}"
+            pair3_rev = f"{intermediate}{base}"
+            
+            # Ищем доступные пары (прямые или обратные)
+            p1 = pair_index.get(pair1_key) or pair_index.get(pair1_rev)
+            p2 = pair_index.get(pair2_key) or pair_index.get(pair2_rev)
+            p3 = pair_index.get(pair3_key) or pair_index.get(pair3_rev)
+            
+            if not (p1 and p2 and p3):
+                continue
+            
+            # Проверяем минимальные объемы (СНИЖЕНО)
+            min_volume = min(p1.volume_24h, p2.volume_24h, p3.volume_24h)
+            if min_volume < PAIR_FILTERS['min_volume_24h']:
+                continue
+            
+            # Комиссия биржи
+            fee = self.active_exchanges[exchange]['fee'] / 100
+            
+            try:
+                # Получаем правильные цены (учитываем обратные пары)
+                price1 = p1.price if pair1_key in pair_index else (1 / p1.price)
+                price2 = p2.price if pair2_key in pair_index else (1 / p2.price)
+                price3 = p3.price if pair3_key in pair_index else (1 / p3.price)
                 
-                # Проверяем минимальные объемы
-                min_volume = min(pair1.volume_24h, pair2.volume_24h, pair3.volume_24h)
-                if min_volume < PAIR_FILTERS['min_volume_24h']:
-                    continue
-                
-                # Комиссия биржи
-                fee = self.active_exchanges[exchange]['fee'] / 100
-                
-                # Прямой треугольный арбитраж: USDT -> BTC -> ETH -> USDT
-                forward_result = (1 / pair1.price) * pair3.price * pair2.price
+                # Прямой треугольный арбитраж: quote -> base -> intermediate -> quote
+                forward_result = (1 / price1) * price3 * price2
                 forward_profit = (forward_result - 1) * 100 - (fee * 3 * 100)  # 3 сделки
                 
-                # Обратный треугольный арбитраж: USDT -> ETH -> BTC -> USDT
-                reverse_result = (1 / pair2.price) * (1 / pair3.price) * pair1.price
+                # Обратный треугольный арбитраж: quote -> intermediate -> base -> quote
+                reverse_result = (1 / price2) * (1 / price3) * price1
                 reverse_profit = (reverse_result - 1) * 100 - (fee * 3 * 100)
                 
-                # Уровень уверенности на основе объемов
+                # Уровень уверенности на основе объемов (СНИЖЕН порог)
+                confidence = min(min_volume / 10000, 1.0)  # Снижено с 50000 до 10000
+                
+                # Проверяем прибыльность (остается 0.75%)
+                if forward_profit >= self.min_profit_threshold:
+                    opportunities.append(ArbitrageOpportunity(
+                        type='triangular',
+                        profit_percent=forward_profit,
+                        details={
+                            'exchange': exchange,
+                            'path': f"{quote} -> {base} -> {intermediate} -> {quote}",
+                            'pairs': [p1.symbol, p3.symbol, p2.symbol],
+                            'prices': [price1, price3, price2],
+                            'volume': min_volume,
+                            'direction': 'forward'
+                        },
+                        timestamp=datetime.now(),
+                        confidence=confidence
+                    ))
+                
+                if reverse_profit >= self.min_profit_threshold:
+                    opportunities.append(ArbitrageOpportunity(
+                        type='triangular',
+                        profit_percent=reverse_profit,
+                        details={
+                            'exchange': exchange,
+                            'path': f"{quote} -> {intermediate} -> {base} -> {quote}",
+                            'pairs': [p2.symbol, p3.symbol, p1.symbol],
+                            'prices': [price2, 1/price3, price1],
+                            'volume': min_volume,
+                            'direction': 'reverse'
+                        },
+                        timestamp=datetime.now(),
+                        confidence=confidence
+                    ))
+                    
+            except (ZeroDivisionError, ValueError) as e:
+                # Пропускаем пары с некорректными ценами
+                continue
+        
+        return sorted(opportunities, key=lambda x: x.profit_percent, reverse=True)
                 confidence = min(1.0, min_volume / 50000)
                 
                 # Проверяем прибыльность прямого направления

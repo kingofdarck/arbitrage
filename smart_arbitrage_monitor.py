@@ -55,17 +55,17 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
     def __init__(self):
         super().__init__()
         
-        # Настройки из конфига
+        # Настройки из конфига - АГРЕССИВНЫЕ
         self.min_profit_threshold = MONITORING_CONFIG['min_profit_threshold']  # 0.75%
-        self.max_notifications_per_cycle = MONITORING_CONFIG['max_opportunities_per_notification']  # 15
+        self.max_notifications_per_cycle = MONITORING_CONFIG['max_opportunities_per_notification']  # 25
         
         # Устанавливаем единый порог 0.75% для поиска и уведомлений
-        self.search_min_profit = 0.75  # Ищем и уведомляем от 0.75%
-        self.min_confidence = 0.3      # Минимальная уверенность
+        self.search_min_profit = 0.75  # Остается 0.75%
+        self.min_confidence = 0.1      # СНИЖЕНО с 0.3 до 0.1 для большего количества сигналов
         
-        # Отслеживание возможностей
+        # Отслеживание возможностей - АГРЕССИВНЫЕ настройки
         self.tracked_opportunities: Dict[str, TrackedOpportunity] = {}
-        self.opportunity_expiry_hours = 2  # Возможности "устаревают" через 2 часа
+        self.opportunity_expiry_hours = 1  # СНИЖЕНО с 2 до 1 часа для более частых повторов
         
         # Статистика
         self.stats = {
@@ -81,10 +81,13 @@ class SmartArbitrageMonitor(EnhancedArbitrageMonitor):
         
         self.running = True
         
-        logger.info("🧠 Умный арбитражный монитор инициализирован")
+        logger.info("🧠 АГРЕССИВНЫЙ умный арбитражный монитор инициализирован")
         logger.info(f"📊 Настройки: мин. прибыль {self.min_profit_threshold}%")
         logger.info(f"🔍 Поиск и уведомления от {self.search_min_profit}%")
+        logger.info(f"⚡ АГРЕССИВНЫЕ настройки: уверенность {self.min_confidence}, срок {self.opportunity_expiry_hours}ч")
         logger.info(f"📱 Раздельные уведомления для каждого типа арбитража")
+        logger.info(f"🌐 Мониторинг ВСЕХ доступных торговых пар (без белого списка)")
+        logger.info(f"🔺 Треугольный арбитраж: ВСЕ возможные комбинации валют")
 
     def generate_opportunity_hash(self, opportunity: ArbitrageOpportunity) -> str:
         """Генерация хеша для идентификации возможности"""
@@ -464,7 +467,7 @@ async def main():
     signal.signal(signal.SIGTERM, signal_handler)
     
     try:
-        await monitor.run(check_interval=10)
+        await monitor.run(check_interval=5)  # СНИЖЕНО с 10 до 5 секунд
     except KeyboardInterrupt:
         logger.info("Программа остановлена пользователем")
     except Exception as e:
