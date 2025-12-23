@@ -46,7 +46,7 @@ class CombinedSystem:
     async def start_bot(self):
         """Запуск Telegram бота"""
         try:
-            from telegram.ext import Application
+            from telegram.ext import Application, CommandHandler, CallbackQueryHandler
             
             self.bot = ArbitrageBot()
             
@@ -54,21 +54,27 @@ class CombinedSystem:
             application = Application.builder().token(self.bot.bot_token).build()
             
             # Добавляем обработчики
-            from telegram.ext import CommandHandler, CallbackQueryHandler
             application.add_handler(CommandHandler("start", self.bot.start_command))
             application.add_handler(CallbackQueryHandler(self.bot.button_handler))
             
             logger.info("🤖 Запуск Telegram бота...")
-            await application.initialize()
-            await application.start()
-            await application.updater.start_polling()
             
-            # Ждем пока не остановят
-            while self.running:
-                await asyncio.sleep(1)
+            # Запускаем бот
+            async with application:
+                await application.start()
+                await application.updater.start_polling()
+                
+                # Ждем пока не остановят
+                while self.running:
+                    await asyncio.sleep(1)
+                    
+                await application.updater.stop()
+                await application.stop()
                 
         except Exception as e:
             logger.error(f"❌ Ошибка бота: {e}")
+            import traceback
+            traceback.print_exc()
 
     async def run(self):
         """Запуск обеих систем"""
