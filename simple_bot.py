@@ -277,6 +277,21 @@ def main():
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CallbackQueryHandler(button_handler))
     
+    # Устанавливаем команды бота при запуске
+    async def post_init(application):
+        """Инициализация после запуска"""
+        try:
+            from telegram import BotCommand
+            commands = [
+                BotCommand("start", "🤖 Главное меню управления арбитражем")
+            ]
+            await application.bot.set_my_commands(commands)
+            logger.info("✅ Команды бота установлены")
+        except Exception as e:
+            logger.error(f"❌ Ошибка установки команд: {e}")
+    
+    application.post_init = post_init
+    
     # Запускаем бота
     logger.info("🤖 Запуск простого Telegram бота...")
     print("🤖 Бот запущен! Отправьте /start в Telegram")
