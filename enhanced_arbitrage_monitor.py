@@ -672,25 +672,6 @@ class EnhancedArbitrageMonitor:
                 continue
         
         return sorted(opportunities, key=lambda x: x.profit_percent, reverse=True)
-                        type='triangular',
-                        profit_percent=reverse_profit,
-                        confidence=confidence,
-                        details={
-                            'exchange': exchange,
-                            'direction': 'reverse',
-                            'path': f"{quote} -> {intermediate} -> {base} -> {quote}",
-                            'pairs': [pair2_key, pair3_key, pair1_key],
-                            'prices': [pair2.price, pair3.price, pair1.price],
-                            'volumes': [pair2.volume_24h, pair3.volume_24h, pair1.volume_24h],
-                            'calculation': f"1 / {pair2.price:.6f} * (1 / {pair3.price:.6f}) * {pair1.price:.6f} = {reverse_result:.6f}",
-                            'fee_per_trade': fee * 100,
-                            'total_fees': fee * 3 * 100
-                        },
-                        timestamp=datetime.now()
-                    )
-                    opportunities.append(opportunity)
-        
-        return sorted(opportunities, key=lambda x: x.profit_percent, reverse=True)
 
     async def monitor_loop(self, check_interval: int = 30):
         """Основной цикл мониторинга"""
