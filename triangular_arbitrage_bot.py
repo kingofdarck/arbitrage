@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Чистый треугольный арбитраж бот для Bybit
+Чистый треугольный арбитраж бот для MEXC
 Только треугольный арбитраж + Telegram уведомления о сделках
 """
 
@@ -140,22 +140,22 @@ class TriangularArbitrageBot:
     
     async def initialize(self):
         """Инициализация"""
-        self.logger.info("🔺 Инициализация треугольного арбитража...")
+        self.logger.info("🔺 Инициализация треугольного арбитража на MEXC...")
         
-        # Инициализация Bybit
-        api_key = os.getenv('BYBIT_API_KEY')
-        api_secret = os.getenv('BYBIT_API_SECRET')
-        sandbox = os.getenv('BYBIT_SANDBOX', 'false').lower() == 'true'
+        # Инициализация MEXC
+        api_key = os.getenv('MEXC_API_KEY')
+        api_secret = os.getenv('MEXC_API_SECRET')
+        sandbox = os.getenv('MEXC_SANDBOX', 'false').lower() == 'true'
         
         if not api_key or not api_secret:
-            self.logger.error("❌ API ключи Bybit не найдены!")
+            self.logger.error("❌ API ключи MEXC не найдены!")
             return False
         
         if len(api_key) < 20 or len(api_secret) < 30:
             self.logger.warning("⚠️ API ключи кажутся короткими")
         
         try:
-            self.exchange = ccxt.bybit({
+            self.exchange = ccxt.mexc({
                 'apiKey': api_key,
                 'secret': api_secret,
                 'sandbox': sandbox,
@@ -166,12 +166,12 @@ class TriangularArbitrageBot:
             
             # Загружаем рынки
             self.markets = await self.exchange.load_markets()
-            self.logger.info(f"✅ Загружено {len(self.markets)} торговых пар")
+            self.logger.info(f"✅ Загружено {len(self.markets)} торговых пар MEXC")
             
             # Инициализация Telegram
             if self.telegram_token and self.telegram_chat_id:
                 self.logger.info("🤖 Инициализация Telegram бота...")
-                await self.send_telegram("🔺 **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ЗАПУЩЕН**\n\n✅ Подключение к Bybit установлено\n📊 Поиск только треугольных возможностей")
+                await self.send_telegram("🔺 **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ЗАПУЩЕН**\n\n✅ Подключение к MEXC установлено\n📊 Поиск только треугольных возможностей")
                 self.logger.info("✅ Telegram бот инициализирован")
             else:
                 self.logger.warning("⚠️ Telegram не настроен - токен или chat_id отсутствуют")
@@ -182,7 +182,7 @@ class TriangularArbitrageBot:
             return True
             
         except Exception as e:
-            self.logger.error(f"❌ Ошибка инициализации: {e}")
+            self.logger.error(f"❌ Ошибка инициализации MEXC: {e}")
             return False
     
     async def generate_triangles(self):
@@ -304,8 +304,8 @@ class TriangularArbitrageBot:
                 profit = final_amount - initial_amount
                 profit_percent = (profit / initial_amount) * 100
                 
-                # Учитываем комиссии Bybit (0.1% за сделку)
-                fees = initial_amount * 0.003  # 3 сделки по 0.1%
+                # Учитываем комиссии MEXC (0.2% за сделку)
+                fees = initial_amount * 0.006  # 3 сделки по 0.2%
                 net_profit = profit - fees
                 net_profit_percent = (net_profit / initial_amount) * 100
                 
@@ -597,7 +597,7 @@ class TriangularArbitrageBot:
 • Общая прибыль: ${self.stats['total_profit']:.2f}
 • Найдено возможностей: {self.stats['opportunities_found']}
 
-🔺 Только треугольный арбитраж на Bybit
+🔺 Только треугольный арбитраж на MEXC
         """)
         
         if self.exchange:
@@ -605,11 +605,11 @@ class TriangularArbitrageBot:
 
 async def main():
     """Главная функция"""
-    print("🔺 ТРЕУГОЛЬНЫЙ АРБИТРАЖ НА BYBIT")
+    print("🔺 ТРЕУГОЛЬНЫЙ АРБИТРАЖ НА MEXC")
     print("=" * 50)
     print("🎯 Только треугольные возможности")
     print("📱 Telegram уведомления о сделках")
-    print("💰 Реальная торговля на Bybit")
+    print("💰 Реальная торговля на MEXC")
     print("=" * 50)
     
     bot = TriangularArbitrageBot()
