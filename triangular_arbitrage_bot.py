@@ -54,10 +54,8 @@ class TriangularArbitrageBot:
         self.markets = {}
         self.valid_triangles = []
         
-        # Настройки
-        self.min_profit = float(os.getenv('MIN_PROFIT_THRESHOLD', '0.75'))
-        self.max_position = float(os.getenv('MAX_POSITION_SIZE', '50.0'))
-        self.trading_mode = os.getenv('TRADING_MODE', 'live')
+        # Загружаем настройки из файла управления
+        self.load_control_settings()
         
         # Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
@@ -75,6 +73,58 @@ class TriangularArbitrageBot:
         
         self.setup_logging()
         self.is_running = False
+        
+        # Добавляем логгер для методов
+        if not hasattr(self, 'logger'):
+            self.logger = logging.getLogger(__name__)
+    
+    def load_control_settings(self):
+        """Загрузка настроек из файла управления"""
+        try:
+            import json
+            if os.path.exists('triangular_settings.json'):
+                with open('triangular_settings.json', 'r', encoding='utf-8') as f:
+                    control_settings = json.load(f)
+                
+                # Применяем настройки из файла управления
+                self.min_profit = control_settings.get('min_profit', 0.75)
+                self.max_position = control_settings.get('max_position', 50.0)
+                self.trading_mode = control_settings.get('trading_mode', 'live')
+                
+                self.logger.info(f"✅ Настройки загружены из управления: прибыль {self.min_profit}%, позиция ${self.max_position}, режим {self.trading_mode}")
+            else:
+                # Настройки по умолчанию из .env
+                self.min_profit = float(os.getenv('MIN_PROFIT_THRESHOLD', '0.75'))
+                self.max_position = float(os.getenv('MAX_POSITION_SIZE', '50.0'))
+                self.trading_mode = os.getenv('TRADING_MODE', 'live')
+                
+                self.logger.info("📋 Используются настройки по умолчанию из .env")
+        except Exception as e:
+            # Fallback к .env настройкам
+            self.min_profit = float(os.getenv('MIN_PROFIT_THRESHOLD', '0.75'))
+            self.max_position = float(os.getenv('MAX_POSITION_SIZE', '50.0'))
+            self.trading_mode = os.getenv('TRADING_MODE', 'live')
+            
+            self.logger.warning(f"⚠️ Ошибка загрузки настроек управления: {e}")
+    
+    def update_stats_to_control(self):
+        """Обновление статистики в файле управления"""
+        try:
+            import json
+            if os.path.exists('triangular_settings.json'):
+                with open('triangular_settings.json', 'r', encoding='utf-8') as f:
+                    control_settings = json.load(f)
+                
+                # Обновляем статистику
+                control_settings['total_trades'] = self.stats['total_trades']
+                control_settings['successful_trades'] = self.stats['successful_trades']
+                control_settings['total_profit'] = self.stats['total_profit']
+                control_settings['bot_running'] = self.is_running
+                
+                with open('triangular_settings.json', 'w', encoding='utf-8') as f:
+                    json.dump(control_settings, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            self.logger.warning(f"⚠️ Ошибка обновления статистики: {e}")
     
     def setup_logging(self):
         """Настройка логирования"""
@@ -396,6 +446,9 @@ class TriangularArbitrageBot:
             self.stats['successful_trades'] += 1
             self.stats['total_profit'] += actual_profit
             
+            # Обновляем статистику в файле управления
+            self.update_stats_to_control()
+            
             self.logger.info(f"✅ Треугольная сделка успешна! Прибыль: ${actual_profit:.2f}")
             return True
             
@@ -414,6 +467,8 @@ class TriangularArbitrageBot:
             """)
             
             self.stats['total_trades'] += 1
+            # Обновляем статистику в файле управления
+            self.update_stats_to_control()
             return False
     
     async def send_trade_notification(self, opportunity: TriangularOpportunity, trades: List[Trade], actual_profit: float, execution_time: float, success: bool):
@@ -488,6 +543,28 @@ class TriangularArbitrageBot:
                                    f"сделок {self.stats['total_trades']}, "
                                    f"успешность {success_rate:.1f}%, "
                                    f"прибыль ${self.stats['total_profit']:.2f}")
+                    
+                    # Обновляем статистику в файле управления
+                    self.update_stats_to_control()
+                
+                # Проверяем настройки каждые 10 циклов
+                if self.stats['cycles'] % 10 == 0:
+                    old_settings = (self.min_profit, self.max_position, self.trading_mode)
+                    self.load_control_settings()
+                    new_settings = (self.min_profit, self.max_position, self.trading_mode)
+                    
+                    if old_settings != new_settings:
+                        self.logger.info("🔄 Настройки обновлены из управления")
+                        await self.send_telegram(f"""
+🔄 **НАСТРОЙКИ ОБНОВЛЕНЫ**
+
+⚙️ **Новые параметры:**
+• Минимальная прибыль: {self.min_profit}%
+• Максимальная позиция: ${self.max_position}
+• Режим торговли: {self.trading_mode}
+
+🔺 Треугольный арбитраж продолжает работу
+                        """)
                 
                 cycle_time = time.time() - cycle_start
                 
