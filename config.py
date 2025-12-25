@@ -89,15 +89,15 @@ PAIR_FILTERS = {
 # Белый список отключен для максимального покрытия
 WHITELIST_PAIRS = []  # Пустой список = мониторим все доступные пары
 
-# Настройки арбитража - ТОЛЬКО межбиржевой и треугольный
+# Настройки арбитража - ТОЛЬКО ТРЕУГОЛЬНЫЙ
 ARBITRAGE_CONFIG = {
     'cross_exchange': {
-        'enabled': True,
-        'min_profit': 0.75,  # Остается 0.75%
-        'min_confidence': 0.1  # Снижено с 0.3 до 0.1
+        'enabled': False,  # ОТКЛЮЧЕН - убираем межбиржевой арбитраж
+        'min_profit': 0.75,
+        'min_confidence': 0.1
     },
     'triangular': {
-        'enabled': True,
+        'enabled': True,   # ЕДИНСТВЕННЫЙ АКТИВНЫЙ ТИП
         'min_profit': 0.75,  # Остается 0.75%
         'min_confidence': 0.1  # Снижено с 0.3 до 0.1
     },

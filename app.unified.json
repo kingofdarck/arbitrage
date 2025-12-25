@@ -1,0 +1,93 @@
+{
+  "name": "Unified Arbitrage System",
+  "description": "Объединенная система арбитража: Telegram бот + треугольный арбитраж + мониторинг возможностей",
+  "keywords": ["arbitrage", "crypto", "trading", "telegram", "bot"],
+  "website": "https://github.com/yourusername/arbitrage",
+  "repository": "https://github.com/yourusername/arbitrage",
+  "logo": "https://cdn-icons-png.flaticon.com/512/2618/2618194.png",
+  "success_url": "/health",
+  "scripts": {
+    "postdeploy": "echo 'Unified Arbitrage System deployed successfully!'"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "image": "heroku/python",
+  "stack": "heroku-22",
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "env": {
+    "TRADING_MODE": {
+      "description": "Режим торговли (test/live)",
+      "value": "live"
+    },
+    "DEBUG": {
+      "description": "Режим отладки",
+      "value": "true"
+    },
+    "MIN_PROFIT_THRESHOLD": {
+      "description": "Минимальная прибыль в процентах",
+      "value": "0.75"
+    },
+    "MAX_POSITION_SIZE": {
+      "description": "Максимальный размер позиции в USD",
+      "value": "100.0"
+    },
+    "TELEGRAM_BOT_TOKEN": {
+      "description": "Токен Telegram бота",
+      "required": true
+    },
+    "TELEGRAM_CHAT_ID": {
+      "description": "ID чата для уведомлений",
+      "required": true
+    },
+    "TELEGRAM_ENABLED": {
+      "description": "Включить Telegram уведомления",
+      "value": "true"
+    },
+    "BYBIT_API_KEY": {
+      "description": "API ключ Bybit",
+      "required": true
+    },
+    "BYBIT_API_SECRET": {
+      "description": "Секретный ключ Bybit",
+      "required": true
+    },
+    "BYBIT_ENABLED": {
+      "description": "Включить торговлю на Bybit",
+      "value": "true"
+    },
+    "BYBIT_SANDBOX": {
+      "description": "Использовать тестовую среду Bybit",
+      "value": "false"
+    },
+    "WEB_ENABLED": {
+      "description": "Включить веб-интерфейс",
+      "value": "true"
+    },
+    "WEB_HOST": {
+      "description": "Хост веб-сервера",
+      "value": "0.0.0.0"
+    },
+    "LOG_LEVEL": {
+      "description": "Уровень логирования",
+      "value": "INFO"
+    },
+    "PYTHONUNBUFFERED": {
+      "description": "Отключить буферизацию Python",
+      "value": "1"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini",
+      "as": "DATABASE"
+    }
+  ]
+}

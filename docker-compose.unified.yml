@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  arbitrage-system:
+    build:
+      context: .
+      dockerfile: Dockerfile.unified
+    container_name: unified-arbitrage-system
+    restart: unless-stopped
+    
+    # Переменные окружения
+    environment:
+      # Режим торговли
+      - TRADING_MODE=live
+      - DEBUG=true
+      
+      # Настройки арбитража
+      - MIN_PROFIT_THRESHOLD=0.75
+      - MAX_POSITION_SIZE=100.0
+      - MAX_SLIPPAGE=0.1
+      - TIMEOUT_SECONDS=30
+      
+      # Telegram (ОБЯЗАТЕЛЬНО ЗАПОЛНИТЕ!)
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-8565304713:AAFpnuNkp4QR6Yk9H-5NoN8l3Z1pN2WigKQ}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-884434550}
+      - TELEGRAM_ENABLED=true
+      
+      # API ключи бирж (ОБЯЗАТЕЛЬНО ЗАПОЛНИТЕ!)
+      - BYBIT_ENABLED=true
+      - BYBIT_API_KEY=${BYBIT_API_KEY:-ВСТАВЬТЕ_ВАШ_BYBIT_API_KEY}
+      - BYBIT_API_SECRET=${BYBIT_API_SECRET:-ВСТАВЬТЕ_ВАШ_BYBIT_SECRET}
+      - BYBIT_SANDBOX=false
+      
+      # Дополнительные биржи
+      - BINANCE_ENABLED=false
+      - KUCOIN_ENABLED=true
+      - MEXC_ENABLED=true
+      - OKX_ENABLED=false
+      
+      # Веб-интерфейс
+      - WEB_ENABLED=true
+      - WEB_HOST=0.0.0.0
+      - WEB_PORT=8080
+      - PORT=8080
+      
+      # Логирование
+      - LOG_LEVEL=INFO
+      - LOG_FILE=logs/unified_system.log
+    
+    # Порты
+    ports:
+      - "8080:8080"
+    
+    # Тома для сохранения данных
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./persistent_settings.json:/app/persistent_settings.json
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Ограничения ресурсов
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+
+  # Дополнительный сервис для мониторинга (опционально)
+  monitoring:
+    image: prom/prometheus:latest
+    container_name: arbitrage-monitoring
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - arbitrage-system
+    profiles:
+      - monitoring
+
+networks:
+  default:
+    name: arbitrage-network

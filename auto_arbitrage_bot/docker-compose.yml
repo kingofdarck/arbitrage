@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  triangular-arbitrage:
+    build: .
+    container_name: triangular-arbitrage-bot
+    restart: unless-stopped
+    environment:
+      - BYBIT_API_KEY=${BYBIT_API_KEY}
+      - BYBIT_API_SECRET=${BYBIT_API_SECRET}
+      - BYBIT_SANDBOX=${BYBIT_SANDBOX:-false}
+      - TRADING_MODE=${TRADING_MODE:-test}
+      - MIN_PROFIT_THRESHOLD=${MIN_PROFIT_THRESHOLD:-0.5}
+      - MAX_POSITION_SIZE=${MAX_POSITION_SIZE:-50.0}
+      - TELEGRAM_ENABLED=${TELEGRAM_ENABLED:-true}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    networks:
+      - arbitrage-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8080/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Опциональный Telegram бот для управления
+  telegram-control:
+    build: .
+    container_name: telegram-control-bot
+    restart: unless-stopped
+    command: ["python", "telegram_control_bot.py"]
+    environment:
+      - TELEGRAM_BOT_TOKEN=${CONTROL_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    networks:
+      - arbitrage-network
+    depends_on:
+      - triangular-arbitrage
+
+networks:
+  arbitrage-network:
+    driver: bridge
+
+volumes:
+  logs:
+  data:
