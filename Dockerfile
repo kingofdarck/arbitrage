@@ -1,27 +1,19 @@
-# Простой Dockerfile для треугольного арбитража
+# Dockerfile для треугольного арбитража
 FROM python:3.11-slim
-
-# Устанавливаем системные зависимости
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
 
 # Создаем рабочую директорию
 WORKDIR /app
 
-# Устанавливаем только необходимые зависимости
+# Устанавливаем зависимости
 RUN pip install --no-cache-dir \
     ccxt==4.1.64 \
     python-telegram-bot==20.7 \
     python-dotenv==1.0.0
 
-# Копируем только необходимые файлы
-COPY simple_arbitrage_system.py .
+# Копируем файлы
+COPY triangular_arbitrage_bot.py .
 COPY main.py .
-COPY auto_arbitrage_bot/.env ./auto_arbitrage_bot/
-
-# Создаем директорию для логов
-RUN mkdir -p logs
+COPY .env .
 
 # Переменные окружения
 ENV PYTHONUNBUFFERED=1
