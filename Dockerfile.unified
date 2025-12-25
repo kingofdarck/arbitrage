@@ -1,46 +1,30 @@
-# Объединенный Dockerfile для всей системы арбитража
+# Простой Dockerfile для треугольного арбитража
 FROM python:3.11-slim
 
 # Устанавливаем системные зависимости
 RUN apt-get update && apt-get install -y \
     gcc \
-    g++ \
     && rm -rf /var/lib/apt/lists/*
 
 # Создаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы зависимостей
-COPY requirements.txt .
-COPY auto_arbitrage_bot/requirements.txt ./auto_arbitrage_bot/
-
-# Устанавливаем Python зависимости
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Пытаемся установить дополнительные зависимости из auto_arbitrage_bot
-RUN if [ -f auto_arbitrage_bot/requirements.txt ]; then \
-    pip install --no-cache-dir -r auto_arbitrage_bot/requirements.txt || true; \
-    fi
-
-# Устанавливаем дополнительные пакеты для объединенной системы
+# Устанавливаем только необходимые зависимости
 RUN pip install --no-cache-dir \
-    aiohttp \
-    python-telegram-bot \
-    ccxt \
-    python-dotenv
+    ccxt==4.1.64 \
+    python-telegram-bot==20.7 \
+    python-dotenv==1.0.0
 
-# Копируем весь проект
-COPY . .
+# Копируем только необходимые файлы
+COPY simple_arbitrage_system.py .
+COPY main.py .
+COPY auto_arbitrage_bot/.env ./auto_arbitrage_bot/
 
-# Создаем необходимые директории
-RUN mkdir -p logs data
+# Создаем директорию для логов
+RUN mkdir -p logs
 
-# Устанавливаем переменные окружения
-ENV PYTHONPATH=/app:/app/auto_arbitrage_bot
+# Переменные окружения
 ENV PYTHONUNBUFFERED=1
 
-# Порт для health check
-EXPOSE 8080
-
-# Команда запуска объединенной системы
-CMD ["python", "unified_system.py"]
+# Команда запуска
+CMD ["python", "main.py"]
