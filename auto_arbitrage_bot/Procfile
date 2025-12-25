@@ -1,1 +1,0 @@
-worker: python bybit_live_triangular.py
