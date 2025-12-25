@@ -57,6 +57,15 @@ class TriangularArbitrageBot:
         # Загружаем настройки из файла управления
         self.load_control_settings()
         
+        # Проверяем что арбитраж не запущен по умолчанию
+        if not hasattr(self, 'min_profit'):
+            self.min_profit = float(os.getenv('MIN_PROFIT_THRESHOLD', '0.75'))
+            self.max_position = float(os.getenv('MAX_POSITION_SIZE', '50.0'))
+            self.trading_mode = os.getenv('TRADING_MODE', 'live')
+            
+        # Арбитраж по умолчанию ВЫКЛЮЧЕН
+        self.auto_start = False
+        
         # Telegram
         self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
@@ -91,21 +100,33 @@ class TriangularArbitrageBot:
                 self.max_position = control_settings.get('max_position', 50.0)
                 self.trading_mode = control_settings.get('trading_mode', 'live')
                 
-                self.logger.info(f"✅ Настройки загружены из управления: прибыль {self.min_profit}%, позиция ${self.max_position}, режим {self.trading_mode}")
+                # Проверяем команду запуска
+                bot_running = control_settings.get('bot_running', False)
+                if bot_running and not self.is_running:
+                    self.should_run = True
+                    self.logger.info("✅ Получена команда запуска из Telegram")
+                elif not bot_running and self.is_running:
+                    self.is_running = False
+                    self.logger.info("⏹️ Получена команда остановки из Telegram")
+                
+                if hasattr(self, 'logger'):
+                    self.logger.info(f"✅ Настройки загружены: прибыль {self.min_profit}%, позиция ${self.max_position}, режим {self.trading_mode}")
             else:
                 # Настройки по умолчанию из .env
                 self.min_profit = float(os.getenv('MIN_PROFIT_THRESHOLD', '0.75'))
                 self.max_position = float(os.getenv('MAX_POSITION_SIZE', '50.0'))
                 self.trading_mode = os.getenv('TRADING_MODE', 'live')
                 
-                self.logger.info("📋 Используются настройки по умолчанию из .env")
+                if hasattr(self, 'logger'):
+                    self.logger.info("📋 Используются настройки по умолчанию из .env")
         except Exception as e:
             # Fallback к .env настройкам
             self.min_profit = float(os.getenv('MIN_PROFIT_THRESHOLD', '0.75'))
             self.max_position = float(os.getenv('MAX_POSITION_SIZE', '50.0'))
             self.trading_mode = os.getenv('TRADING_MODE', 'live')
             
-            self.logger.warning(f"⚠️ Ошибка загрузки настроек управления: {e}")
+            if hasattr(self, 'logger'):
+                self.logger.warning(f"⚠️ Ошибка загрузки настроек управления: {e}")
     
     def update_stats_to_control(self):
         """Обновление статистики в файле управления"""
@@ -509,8 +530,38 @@ class TriangularArbitrageBot:
     
     async def run(self):
         """Главный цикл треугольного арбитража"""
+        self.logger.info("🔺 Система треугольного арбитража готова...")
+        self.logger.info("⚠️ Арбитраж по умолчанию ВЫКЛЮЧЕН")
+        self.logger.info("💡 Используйте Telegram бот для запуска")
+        
+        # Ждем команды запуска через Telegram
+        while True:
+            try:
+                # Перезагружаем настройки каждые 10 секунд
+                self.load_control_settings()
+                
+                # Проверяем нужно ли запускать арбитраж
+                if not self.is_running and hasattr(self, 'should_run') and self.should_run:
+                    self.logger.info("🚀 Получена команда запуска через Telegram")
+                    self.is_running = True
+                    break
+                elif not self.is_running:
+                    # Ждем команды запуска
+                    await asyncio.sleep(10)
+                    continue
+                else:
+                    # Арбитраж уже запущен, выходим из ожидания
+                    break
+                    
+            except KeyboardInterrupt:
+                self.logger.info("⏹️ Остановка по запросу пользователя")
+                return
+            except Exception as e:
+                self.logger.error(f"❌ Ошибка ожидания: {e}")
+                await asyncio.sleep(10)
+        
+        # Основной цикл арбитража (запускается только после команды)
         self.logger.info("🔺 Запуск треугольного арбитража...")
-        self.is_running = True
         
         while self.is_running:
             try:
