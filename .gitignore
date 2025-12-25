@@ -10,6 +10,7 @@
 # .gitignore
 # README.md
 # ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
+# test_telegram.py
 
 # Игнорируем все остальное
 *
@@ -22,6 +23,7 @@
 !.gitignore
 !README.md
 !ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
+!test_telegram.py
 
 # Логи
 *.log

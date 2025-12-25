@@ -14,8 +14,6 @@ from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import logging
 from dataclasses import dataclass
-from telegram import Bot
-from telegram.error import TelegramError
 
 # Загружаем переменные окружения
 try:
@@ -122,9 +120,11 @@ class TriangularArbitrageBot:
             
             # Инициализация Telegram
             if self.telegram_token and self.telegram_chat_id:
-                self.telegram_bot = Bot(token=self.telegram_token)
+                self.logger.info("🤖 Инициализация Telegram бота...")
                 await self.send_telegram("🔺 **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ЗАПУЩЕН**\n\n✅ Подключение к Bybit установлено\n📊 Поиск только треугольных возможностей")
                 self.logger.info("✅ Telegram бот инициализирован")
+            else:
+                self.logger.warning("⚠️ Telegram не настроен - токен или chat_id отсутствуют")
             
             # Генерируем треугольники
             await self.generate_triangles()
@@ -190,17 +190,32 @@ class TriangularArbitrageBot:
     
     async def send_telegram(self, message: str):
         """Отправка сообщения в Telegram"""
-        if not self.telegram_bot or not self.telegram_chat_id:
+        if not self.telegram_token or not self.telegram_chat_id:
+            self.logger.warning("⚠️ Telegram токен или chat_id не настроены")
             return
         
         try:
+            if not self.telegram_bot:
+                from telegram import Bot
+                self.telegram_bot = Bot(token=self.telegram_token)
+            
             await self.telegram_bot.send_message(
                 chat_id=self.telegram_chat_id,
                 text=message,
                 parse_mode='Markdown'
             )
-        except TelegramError as e:
+            self.logger.info("📱 Telegram сообщение отправлено")
+        except Exception as e:
             self.logger.error(f"❌ Ошибка Telegram: {e}")
+            # Попробуем без Markdown
+            try:
+                await self.telegram_bot.send_message(
+                    chat_id=self.telegram_chat_id,
+                    text=message
+                )
+                self.logger.info("📱 Telegram сообщение отправлено (без Markdown)")
+            except Exception as e2:
+                self.logger.error(f"❌ Критическая ошибка Telegram: {e2}")
     
     async def find_triangular_opportunities(self):
         """Поиск треугольных возможностей"""
