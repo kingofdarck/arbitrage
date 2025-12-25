@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 """
-Рабочий Telegram бот с кнопками для MEXC треугольного арбитража
-Арбитраж выключен по умолчанию
+Telegram бот управления треугольным арбитражем на MEXC
+РАБОЧИЕ КНОПКИ - как до переключения на MEXC
 """
 
 import asyncio
 import logging
 import json
 import os
-import time
 from datetime import datetime
-from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
-from telegram.ext import Application, MessageHandler, ContextTypes, filters, CommandHandler
-from telegram.error import NetworkError, TimedOut
+from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, MessageHandler, CallbackQueryHandler, ContextTypes, filters, CommandHandler
 
 # Загружаем переменные окружения
 try:
@@ -45,16 +43,17 @@ default_settings = {
 }
 
 def load_settings():
-    """Загрузка настроек из файла"""
+    """Загрузка настроек из файла - ПРОСТАЯ И НАДЕЖНАЯ"""
     try:
         if os.path.exists(SETTINGS_FILE):
             with open(SETTINGS_FILE, 'r', encoding='utf-8') as f:
-                settings = json.load(f)
+                loaded_settings = json.load(f)
                 logger.info("✅ Настройки загружены из файла")
-                return settings
+                return loaded_settings
     except Exception as e:
         logger.warning(f"⚠️ Ошибка загрузки настроек: {e}")
     
+    # Возвращаем копию настроек по умолчанию
     return default_settings.copy()
 
 def save_settings(settings):
@@ -78,168 +77,239 @@ def get_main_keyboard():
         [KeyboardButton("▶️ Запуск"), KeyboardButton("⏹️ Остановка")],
         [KeyboardButton("🔄 Перезапуск"), KeyboardButton("📈 Статистика")]
     ]
-    return ReplyKeyboardMarkup(
-        keyboard, 
-        resize_keyboard=True, 
-        is_persistent=True,
-        one_time_keyboard=False
-    )
-
-async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Обработчик ошибок"""
-    logger.error(f"Exception while handling an update: {context.error}")
+    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Команда /start"""
-    try:
-        keyboard = get_main_keyboard()
-        
-        text = f"""
+    await show_welcome(update, context)
+
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обработчик всех сообщений - РАБОЧИЙ КАК ДО MEXC"""
+    message_text = update.message.text
+    
+    # ВСЕГДА отправляем клавиатуру
+    keyboard = get_main_keyboard()
+    
+    if message_text == "📊 Статус":
+        await show_status(update, context)
+    elif message_text == "⚙️ Настройки":
+        await show_settings(update, context)
+    elif message_text == "▶️ Запуск":
+        await start_arbitrage(update, context)
+    elif message_text == "⏹️ Остановка":
+        await stop_arbitrage(update, context)
+    elif message_text == "🔄 Перезапуск":
+        await restart_arbitrage(update, context)
+    elif message_text == "📈 Статистика":
+        await show_stats(update, context)
+    else:
+        # Приветственное сообщение для любого другого текста
+        await show_welcome(update, context)
+
+async def show_welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Показать приветственное сообщение"""
+    keyboard = get_main_keyboard()
+    
+    text = f"""
 🔺 **ТРЕУГОЛЬНЫЙ АРБИТРАЖ НА MEXC**
 
 Добро пожаловать в систему управления!
 
 📊 **Текущие настройки:**
-• Минимальная прибыль: {settings['min_profit']}%
-• Максимальная позиция: ${settings['max_position']}
-• Режим торговли: {settings['trading_mode']}
-• Статус бота: {'🟢 Работает' if settings['bot_running'] else '🔴 Остановлен'}
+• Минимальная прибыль: {settings.get('min_profit', 0.75)}%
+• Максимальная позиция: ${settings.get('max_position', 50.0)}
+• Режим торговли: {settings.get('trading_mode', 'live')}
+• Тестовая среда: {'✅' if settings.get('mexc_sandbox', False) else '❌'}
+• Статус бота: {'🟢 Работает' if settings.get('bot_running', False) else '🔴 Остановлен'}
 
 🔺 **Только треугольный арбитраж:**
 • Поиск треугольных возможностей на MEXC
 • Автоматическое исполнение прибыльных сделок
 • Детальные уведомления о каждой сделке
 
-💡 **Используйте кнопки внизу для управления**
-
-⚠️ **Арбитраж по умолчанию ВЫКЛЮЧЕН**
+⚠️ **АРБИТРАЖ ПО УМОЛЧАНИЮ ВЫКЛЮЧЕН**
 Нажмите "▶️ Запуск" для начала работы
-        """
-        
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Команда /start выполнена")
-        
-    except Exception as e:
-        logger.error(f"Ошибка в start_command: {e}")
 
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Обработчик всех сообщений"""
-    try:
-        if not update.message or not update.message.text:
-            return
-            
-        message_text = update.message.text
-        logger.info(f"📨 Получено сообщение: {message_text}")
-        
-        # Всегда отправляем клавиатуру
-        keyboard = get_main_keyboard()
-        
-        if message_text == "📊 Статус":
-            await show_status(update, context, keyboard)
-        elif message_text == "⚙️ Настройки":
-            await show_settings(update, context, keyboard)
-        elif message_text == "▶️ Запуск":
-            await start_arbitrage(update, context, keyboard)
-        elif message_text == "⏹️ Остановка":
-            await stop_arbitrage(update, context, keyboard)
-        elif message_text == "🔄 Перезапуск":
-            await restart_arbitrage(update, context, keyboard)
-        elif message_text == "📈 Статистика":
-            await show_stats(update, context, keyboard)
-        else:
-            # Для любого другого текста показываем помощь
-            await show_help(update, context, keyboard)
-            
-    except Exception as e:
-        logger.error(f"Ошибка в handle_message: {e}")
-        try:
-            keyboard = get_main_keyboard()
-            await update.message.reply_text(
-                "❌ Произошла ошибка. Попробуйте еще раз.",
-                reply_markup=keyboard
-            )
-        except:
-            pass
+💡 **Используйте кнопки внизу для управления**
+    """
+    
+    await update.message.reply_text(
+        text, 
+        reply_markup=keyboard, 
+        parse_mode='Markdown'
+    )
 
-async def show_status(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Показать статус системы"""
+async def show_status(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Показать статус системы - РЕАЛЬНАЯ ПРОВЕРКА"""
+    keyboard = get_main_keyboard()
+    
+    # РЕАЛЬНАЯ ПРОВЕРКА ПРОЦЕССОВ
+    arbitrage_running = False
+    process_count = 0
+    process_info = []
+    
     try:
-        status_icon = "🟢" if settings['bot_running'] else "🔴"
-        status_text = "Работает" if settings['bot_running'] else "Остановлен"
+        import psutil
         
-        text = f"""
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline', 'create_time', 'memory_info']):
+            try:
+                if proc.info['cmdline'] and any('triangular_arbitrage_bot.py' in cmd for cmd in proc.info['cmdline']):
+                    arbitrage_running = True
+                    process_count += 1
+                    
+                    # Информация о процессе
+                    create_time = datetime.fromtimestamp(proc.info['create_time'])
+                    uptime = datetime.now() - create_time
+                    memory_mb = proc.info['memory_info'].rss / 1024 / 1024
+                    
+                    process_info.append({
+                        'pid': proc.info['pid'],
+                        'uptime': str(uptime).split('.')[0],  # Убираем микросекунды
+                        'memory': f"{memory_mb:.1f} MB"
+                    })
+                    
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+                
+    except ImportError:
+        # Если psutil не установлен, используем настройки
+        arbitrage_running = settings.get('bot_running', False)
+    
+    # Определяем реальный статус
+    if arbitrage_running and settings.get('bot_running', False):
+        status_icon = "🟢"
+        status_text = "Работает"
+        status_detail = f"Найдено {process_count} активных процессов"
+    elif arbitrage_running and not settings.get('bot_running', False):
+        status_icon = "🟡"
+        status_text = "Работает (не управляется)"
+        status_detail = "Процесс запущен вне системы управления"
+    elif not arbitrage_running and settings.get('bot_running', False):
+        status_icon = "🔴"
+        status_text = "Ошибка (должен работать)"
+        status_detail = "Флаг запуска установлен, но процесс не найден"
+    else:
+        status_icon = "🔴"
+        status_text = "Остановлен"
+        status_detail = "Система не активна"
+    
+    # Формируем сообщение
+    text = f"""
 📊 **СТАТУС ТРЕУГОЛЬНОГО АРБИТРАЖА**
 
 {status_icon} **Состояние:** {status_text}
+📋 **Детали:** {status_detail}
 ⏰ **Последнее обновление:** {settings.get('last_update', 'Неизвестно')}
 
 🔧 **Настройки:**
-• Минимальная прибыль: {settings['min_profit']}%
-• Максимальная позиция: ${settings['max_position']}
-• Режим торговли: {settings['trading_mode']}
+• Минимальная прибыль: {settings.get('min_profit', 0.75)}%
+• Максимальная позиция: ${settings.get('max_position', 50.0)}
+• Режим торговли: {settings.get('trading_mode', 'live')}
+• Тестовая среда MEXC: {'✅' if settings.get('mexc_sandbox', False) else '❌'}
 
 📈 **Статистика:**
-• Всего сделок: {settings['total_trades']}
-• Успешных: {settings['successful_trades']}
-• Общая прибыль: ${settings['total_profit']:.2f}
-
+• Всего сделок: {settings.get('total_trades', 0)}
+• Успешных: {settings.get('successful_trades', 0)}
+• Общая прибыль: ${settings.get('total_profit', 0.0):.2f}
+    """
+    
+    # Добавляем информацию о процессах если есть
+    if process_info:
+        text += "\n🔄 **Активные процессы:**\n"
+        for proc in process_info:
+            text += f"• PID {proc['pid']}: работает {proc['uptime']}, память {proc['memory']}\n"
+    
+    text += """
 🔺 **Только треугольные возможности на MEXC**
 
 💡 **Используйте кнопки внизу для управления**
-        """
-        
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Статус отправлен")
-        
-    except Exception as e:
-        logger.error(f"Ошибка в show_status: {e}")
+    """
+    
+    await update.message.reply_text(
+        text, 
+        reply_markup=keyboard, 
+        parse_mode='Markdown'
+    )
 
-async def show_settings(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Показать настройки"""
-    try:
-        text = f"""
+async def show_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Показать меню настроек с inline кнопками"""
+    keyboard = [
+        [
+            InlineKeyboardButton(f"💰 Прибыль: {settings.get('min_profit', 0.75)}%", callback_data="set_profit"),
+            InlineKeyboardButton(f"💵 Позиция: ${settings.get('max_position', 50.0)}", callback_data="set_position")
+        ],
+        [
+            InlineKeyboardButton(f"🎯 Режим: {settings.get('trading_mode', 'live')}", callback_data="toggle_mode"),
+            InlineKeyboardButton(f"🧪 Sandbox: {'✅' if settings.get('mexc_sandbox', False) else '❌'}", callback_data="toggle_sandbox")
+        ],
+        [
+            InlineKeyboardButton("💾 Сохранить настройки", callback_data="save_settings")
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    text = """
 ⚙️ **НАСТРОЙКИ ТРЕУГОЛЬНОГО АРБИТРАЖА**
 
-📊 **Текущие параметры:**
-• 💰 Минимальная прибыль: {settings['min_profit']}%
-• 💵 Максимальная позиция: ${settings['max_position']}
-• 🎯 Режим торговли: {settings['trading_mode']}
-• 🧪 Sandbox: {'✅' if settings['mexc_sandbox'] else '❌'}
+Нажмите на параметр для изменения:
 
-🔺 **Система ищет только треугольные возможности на MEXC**
+💰 **Минимальная прибыль** - порог прибыльности для сделок
+💵 **Максимальная позиция** - размер позиции в USD
+🎯 **Режим торговли** - live (реальная) / test (симуляция)
+🧪 **Sandbox** - тестовая среда MEXC
 
-🔧 **Для изменения настроек используйте команды:**
-/profit 1.0 - установить прибыль 1.0%
-/position 100 - установить позицию $100
-/mode test - тестовый режим
-/mode live - реальный режим
+🔺 **Система ищет только треугольные возможности**
 
 💡 **Кнопки управления всегда внизу экрана**
-        """
-        
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Настройки отправлены")
-        
-    except Exception as e:
-        logger.error(f"Ошибка в show_settings: {e}")
+    """
+    
+    # ВСЕГДА отправляем основную клавиатуру
+    main_keyboard = get_main_keyboard()
+    await update.message.reply_text(
+        text, 
+        reply_markup=main_keyboard, 
+        parse_mode='Markdown'
+    )
+    
+    # Отправляем inline меню отдельным сообщением
+    await update.message.reply_text(
+        "🎛️ **Панель настроек:**", 
+        reply_markup=reply_markup, 
+        parse_mode='Markdown'
+    )
 
-async def start_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Запуск треугольного арбитража"""
+async def start_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Запуск треугольного арбитража - РЕАЛЬНОЕ ДЕЙСТВИЕ"""
+    keyboard = get_main_keyboard()
+    
+    # Проверяем что арбитраж не запущен
+    if settings.get('bot_running', False):
+        text = """
+⚠️ **АРБИТРАЖ УЖЕ ЗАПУЩЕН!**
+
+🔺 Система уже работает и ищет треугольные возможности
+📊 Используйте кнопку "Статус" для проверки состояния
+⏹️ Используйте кнопку "Остановка" для остановки
+        """
+        await update.message.reply_text(text, reply_markup=keyboard, parse_mode='Markdown')
+        return
+    
+    # РЕАЛЬНЫЙ ЗАПУСК АРБИТРАЖА
+    settings['bot_running'] = True
+    settings['start_time'] = datetime.now().isoformat()
+    save_settings(settings)
+    
+    # Запускаем арбитражный процесс
     try:
-        settings['bot_running'] = True
-        save_settings(settings)
+        import subprocess
+        import sys
+        
+        # Запускаем треугольный арбитраж в фоне
+        subprocess.Popen([
+            sys.executable, 'triangular_arbitrage_bot.py'
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        logger.info("🚀 Треугольный арбитраж запущен в фоне")
         
         text = f"""
 ✅ **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ЗАПУЩЕН!**
@@ -249,57 +319,157 @@ async def start_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE, ke
 ⚙️ Используйте кнопки для управления
 
 📊 **Настройки:**
-• Минимальная прибыль: {settings['min_profit']}%
-• Максимальная позиция: ${settings['max_position']}
-• Режим: {settings['trading_mode']}
+• Минимальная прибыль: {settings.get('min_profit', 0.75)}%
+• Максимальная позиция: ${settings.get('max_position', 50.0)}
+• Режим: {settings.get('trading_mode', 'live')}
 
-💡 **Примечание:** В режиме '{settings['trading_mode']}'. 
-Для реального запуска убедитесь что режим 'live'.
+🚀 **Арбитражный процесс запущен в фоне**
+⏰ Время запуска: {datetime.now().strftime('%H:%M:%S')}
 
-🔺 **Поиск среди 3361 торговой пары MEXC**
+💡 **Примечание:** В режиме '{settings.get('trading_mode', 'live')}'. Для реального запуска убедитесь что режим 'live'.
         """
         
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Арбитраж запущен")
-        
     except Exception as e:
-        logger.error(f"Ошибка в start_arbitrage: {e}")
-
-async def stop_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Остановка треугольного арбитража"""
-    try:
+        logger.error(f"❌ Ошибка запуска арбитража: {e}")
         settings['bot_running'] = False
         save_settings(settings)
         
+        text = f"""
+❌ **ОШИБКА ЗАПУСКА АРБИТРАЖА!**
+
+🚫 Не удалось запустить треугольный арбитраж
+📝 Ошибка: {str(e)}
+🔄 Попробуйте еще раз или проверьте логи
+
+💡 Убедитесь что все зависимости установлены
+        """
+    
+    await update.message.reply_text(
+        text, 
+        reply_markup=keyboard, 
+        parse_mode='Markdown'
+    )
+
+async def stop_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Остановка треугольного арбитража - РЕАЛЬНОЕ ДЕЙСТВИЕ"""
+    keyboard = get_main_keyboard()
+    
+    # Проверяем что арбитраж запущен
+    if not settings.get('bot_running', False):
+        text = """
+⚠️ **АРБИТРАЖ УЖЕ ОСТАНОВЛЕН!**
+
+🔴 Система не работает
+📊 Используйте кнопку "Статус" для проверки состояния
+▶️ Используйте кнопку "Запуск" для запуска
+        """
+        await update.message.reply_text(text, reply_markup=keyboard, parse_mode='Markdown')
+        return
+    
+    # РЕАЛЬНАЯ ОСТАНОВКА АРБИТРАЖА
+    settings['bot_running'] = False
+    settings['stop_time'] = datetime.now().isoformat()
+    save_settings(settings)
+    
+    try:
+        import psutil
+        import os
+        
+        # Находим и останавливаем процессы арбитража
+        stopped_processes = 0
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                if proc.info['cmdline'] and any('triangular_arbitrage_bot.py' in cmd for cmd in proc.info['cmdline']):
+                    proc.terminate()
+                    stopped_processes += 1
+                    logger.info(f"🛑 Остановлен процесс арбитража PID: {proc.info['pid']}")
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+        
+        text = f"""
+⏹️ **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ОСТАНОВЛЕН!**
+
+🛑 Поиск треугольных возможностей приостановлен
+📊 Статистика сохранена
+▶️ Используйте кнопку "Запуск" для возобновления
+
+🔺 Система готова к повторному запуску
+⏰ Время остановки: {datetime.now().strftime('%H:%M:%S')}
+🔄 Остановлено процессов: {stopped_processes}
+
+💾 Все настройки и статистика сохранены
+        """
+        
+    except ImportError:
+        # Если psutil не установлен, просто меняем флаг
         text = """
 ⏹️ **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ОСТАНОВЛЕН!**
 
 🛑 Поиск треугольных возможностей приостановлен
 📊 Статистика сохранена
-▶️ Используйте кнопку "▶️ Запуск" для возобновления
+▶️ Используйте кнопку "Запуск" для возобновления
 
 🔺 Система готова к повторному запуску
-        """
-        
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Арбитраж остановлен")
-        
-    except Exception as e:
-        logger.error(f"Ошибка в stop_arbitrage: {e}")
+⏰ Время остановки: {datetime.now().strftime('%H:%M:%S')}
 
-async def restart_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Перезапуск треугольного арбитража"""
+💡 Для полной остановки перезапустите систему
+        """
+    except Exception as e:
+        logger.error(f"❌ Ошибка остановки: {e}")
+        text = f"""
+⚠️ **АРБИТРАЖ ОСТАНОВЛЕН С ПРЕДУПРЕЖДЕНИЕМ**
+
+🛑 Флаг остановки установлен
+📝 Предупреждение: {str(e)}
+🔄 Процессы могут продолжать работать
+
+💡 Для полной остановки перезапустите систему
+        """
+    
+    await update.message.reply_text(
+        text, 
+        reply_markup=keyboard, 
+        parse_mode='Markdown'
+    )
+
+async def restart_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Перезапуск треугольного арбитража - РЕАЛЬНОЕ ДЕЙСТВИЕ"""
+    keyboard = get_main_keyboard()
+    
     try:
-        settings['bot_running'] = True
+        # Сначала останавливаем
+        settings['bot_running'] = False
         save_settings(settings)
+        
+        import psutil
+        import subprocess
+        import sys
+        import time
+        
+        # Останавливаем старые процессы
+        stopped_processes = 0
+        for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            try:
+                if proc.info['cmdline'] and any('triangular_arbitrage_bot.py' in cmd for cmd in proc.info['cmdline']):
+                    proc.terminate()
+                    stopped_processes += 1
+                    logger.info(f"🛑 Остановлен процесс арбитража PID: {proc.info['pid']}")
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                continue
+        
+        # Ждем завершения процессов
+        time.sleep(2)
+        
+        # Запускаем новый процесс
+        settings['bot_running'] = True
+        settings['restart_time'] = datetime.now().isoformat()
+        save_settings(settings)
+        
+        subprocess.Popen([
+            sys.executable, 'triangular_arbitrage_bot.py'
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        logger.info("🔄 Треугольный арбитраж перезапущен")
         
         text = f"""
 🔄 **ТРЕУГОЛЬНЫЙ АРБИТРАЖ ПЕРЕЗАПУЩЕН!**
@@ -309,194 +479,208 @@ async def restart_arbitrage(update: Update, context: ContextTypes.DEFAULT_TYPE, 
 📊 Статистика продолжается
 
 ⚙️ **Текущие настройки:**
-• Минимальная прибыль: {settings['min_profit']}%
-• Максимальная позиция: ${settings['max_position']}
-• Режим: {settings['trading_mode']}
+• Минимальная прибыль: {settings.get('min_profit', 0.75)}%
+• Максимальная позиция: ${settings.get('max_position', 50.0)}
+• Режим: {settings.get('trading_mode', 'live')}
+
+🔄 **Процесс перезапуска:**
+• Остановлено процессов: {stopped_processes}
+• Новый процесс запущен
+• Время перезапуска: {datetime.now().strftime('%H:%M:%S')}
 
 💡 **Настройки автоматически сохранены**
-🔺 **Поиск на MEXC возобновлен**
         """
         
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Арбитраж перезапущен")
-        
-    except Exception as e:
-        logger.error(f"Ошибка в restart_arbitrage: {e}")
-
-async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Показать статистику"""
-    try:
-        uptime = "Система управления"
-        if settings.get('last_update'):
-            try:
-                last_update = datetime.fromisoformat(settings['last_update'])
-                uptime = str(datetime.now() - last_update)
-            except:
-                pass
-        
-        success_rate = 0
-        if settings['total_trades'] > 0:
-            success_rate = (settings['successful_trades'] / settings['total_trades']) * 100
+    except ImportError:
+        # Если psutil не установлен, просто меняем настройки
+        settings['bot_running'] = True
+        settings['restart_time'] = datetime.now().isoformat()
+        save_settings(settings)
         
         text = f"""
+🔄 **НАСТРОЙКИ ПЕРЕЗАПУЩЕНЫ!**
+
+✅ Новые настройки применены и сохранены
+📊 Статистика продолжается
+
+⚙️ **Текущие настройки:**
+• Минимальная прибыль: {settings.get('min_profit', 0.75)}%
+• Максимальная позиция: ${settings.get('max_position', 50.0)}
+• Режим: {settings.get('trading_mode', 'live')}
+
+💡 Для полного перезапуска используйте кнопки "Остановка" → "Запуск"
+        """
+        
+    except Exception as e:
+        logger.error(f"❌ Ошибка перезапуска: {e}")
+        settings['bot_running'] = False
+        save_settings(settings)
+        
+        text = f"""
+❌ **ОШИБКА ПЕРЕЗАПУСКА!**
+
+🚫 Не удалось перезапустить арбитраж
+📝 Ошибка: {str(e)}
+🔄 Попробуйте использовать кнопки "Остановка" → "Запуск"
+
+💡 Настройки сохранены, но процесс не запущен
+        """
+    
+    await update.message.reply_text(
+        text, 
+        reply_markup=keyboard, 
+        parse_mode='Markdown'
+    )
+
+async def show_stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Показать статистику"""
+    keyboard = get_main_keyboard()
+    
+    uptime = "Система управления"
+    if settings.get('last_update'):
+        try:
+            last_update = datetime.fromisoformat(settings['last_update'])
+            uptime = str(datetime.now() - last_update)
+        except:
+            pass
+    
+    total_trades = settings.get('total_trades', 0)
+    successful_trades = settings.get('successful_trades', 0)
+    success_rate = 0
+    if total_trades > 0:
+        success_rate = (successful_trades / total_trades) * 100
+    
+    text = f"""
 📈 **СТАТИСТИКА ТРЕУГОЛЬНОГО АРБИТРАЖА**
 
 ⏱️ **Время с последнего обновления:** {uptime}
-🔄 **Статус:** {'🟢 Активен' if settings['bot_running'] else '🔴 Остановлен'}
+🔄 **Статус:** {'🟢 Активен' if settings.get('bot_running', False) else '🔴 Остановлен'}
 
 📊 **Торговая статистика:**
-• Всего сделок: {settings['total_trades']}
-• Успешных: {settings['successful_trades']}
+• Всего сделок: {total_trades}
+• Успешных: {successful_trades}
 • Процент успеха: {success_rate:.1f}%
-• Общая прибыль: ${settings['total_profit']:.2f}
+• Общая прибыль: ${settings.get('total_profit', 0.0):.2f}
 
 ⚙️ **Текущие настройки:**
-• Минимальная прибыль: {settings['min_profit']}%
-• Максимальная позиция: ${settings['max_position']}
-• Режим торговли: {settings['trading_mode']}
+• Минимальная прибыль: {settings.get('min_profit', 0.75)}%
+• Максимальная позиция: ${settings.get('max_position', 50.0)}
+• Режим торговли: {settings.get('trading_mode', 'live')}
+• Тестовая среда: {'✅' if settings.get('mexc_sandbox', False) else '❌'}
 
 🔺 **Только треугольные возможности на MEXC**
 
 💡 **Для реальной статистики запустите систему**
-        """
+    """
+    
+    await update.message.reply_text(
+        text, 
+        reply_markup=keyboard, 
+        parse_mode='Markdown'
+    )
+
+async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Обработчик inline кнопок - РЕАЛЬНЫЕ ИЗМЕНЕНИЯ НАСТРОЕК"""
+    query = update.callback_query
+    await query.answer()
+    
+    old_settings = settings.copy()  # Сохраняем старые настройки для сравнения
+    
+    if query.data == "set_profit":
+        profits = [0.5, 0.75, 1.0, 1.5, 2.0]
+        current_profit = settings.get('min_profit', 0.75)
+        current_idx = profits.index(current_profit) if current_profit in profits else 1
+        settings['min_profit'] = profits[(current_idx + 1) % len(profits)]
         
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Статистика отправлена")
+    elif query.data == "set_position":
+        positions = [25.0, 50.0, 100.0, 200.0, 500.0]
+        current_position = settings.get('max_position', 50.0)
+        current_idx = positions.index(current_position) if current_position in positions else 1
+        settings['max_position'] = positions[(current_idx + 1) % len(positions)]
         
-    except Exception as e:
-        logger.error(f"Ошибка в show_stats: {e}")
-
-async def show_help(update: Update, context: ContextTypes.DEFAULT_TYPE, keyboard):
-    """Показать помощь"""
-    try:
-        text = """
-🆘 **ПОМОЩЬ - УПРАВЛЕНИЕ СИСТЕМОЙ**
-
-🔺 **Кнопки управления:**
-📊 **Статус** - текущее состояние системы
-⚙️ **Настройки** - параметры торговли
-▶️ **Запуск** - запустить арбитраж на MEXC
-⏹️ **Остановка** - остановить арбитраж
-🔄 **Перезапуск** - перезапустить с новыми настройками
-📈 **Статистика** - детальная статистика
-
-⚙️ **Команды настроек:**
-/profit [число] - установить минимальную прибыль (%)
-/position [число] - установить размер позиции ($)
-/mode [test/live] - установить режим торговли
-
-📝 **Примеры:**
-/profit 1.0
-/position 100
-/mode live
-
-🔺 **Треугольный арбитраж на MEXC работает 24/7!**
-
-⚠️ **По умолчанию арбитраж ВЫКЛЮЧЕН**
-Нажмите "▶️ Запуск" для начала работы
-        """
+    elif query.data == "toggle_mode":
+        current_mode = settings.get('trading_mode', 'live')
+        settings['trading_mode'] = 'test' if current_mode == 'live' else 'live'
         
-        await update.message.reply_text(
-            text, 
-            reply_markup=keyboard, 
-            parse_mode='Markdown'
-        )
-        logger.info("✅ Помощь отправлена")
+    elif query.data == "toggle_sandbox":
+        settings['mexc_sandbox'] = not settings.get('mexc_sandbox', False)
         
-    except Exception as e:
-        logger.error(f"Ошибка в show_help: {e}")
+    elif query.data == "save_settings":
+        # РЕАЛЬНОЕ СОХРАНЕНИЕ И ПРИМЕНЕНИЕ НАСТРОЕК
+        save_settings(settings)
+        
+        # Проверяем изменились ли настройки
+        changes = []
+        if old_settings.get('min_profit') != settings.get('min_profit'):
+            changes.append(f"Прибыль: {settings.get('min_profit')}%")
+        if old_settings.get('max_position') != settings.get('max_position'):
+            changes.append(f"Позиция: ${settings.get('max_position')}")
+        if old_settings.get('trading_mode') != settings.get('trading_mode'):
+            changes.append(f"Режим: {settings.get('trading_mode')}")
+        if old_settings.get('mexc_sandbox') != settings.get('mexc_sandbox'):
+            changes.append(f"Sandbox: {'✅' if settings.get('mexc_sandbox') else '❌'}")
+        
+        # Уведомляем работающий арбитраж о изменениях
+        arbitrage_notified = False
+        if settings.get('bot_running', False) and changes:
+            try:
+                # Создаем файл-сигнал для арбитража
+                with open('settings_updated.signal', 'w') as f:
+                    f.write(datetime.now().isoformat())
+                arbitrage_notified = True
+                logger.info("📡 Сигнал об обновлении настроек отправлен арбитражу")
+            except Exception as e:
+                logger.warning(f"⚠️ Не удалось уведомить арбитраж: {e}")
+        
+        # Формируем сообщение о сохранении
+        message = "💾 **Настройки сохранены!**\n\n✅ Все изменения применены и сохранены в файл.\n🔺 Треугольный арбитраж будет использовать новые настройки."
+        
+        if changes:
+            message += f"\n\n🔄 **Изменения:**\n• " + "\n• ".join(changes)
+            
+        if arbitrage_notified:
+            message += "\n\n📡 **Работающий арбитраж уведомлен об изменениях**"
+        elif settings.get('bot_running', False):
+            message += "\n\n⚠️ **Для применения изменений рекомендуется перезапуск**"
+        
+        await query.edit_message_text(message, parse_mode='Markdown')
+        return
+    
+    # АВТОМАТИЧЕСКОЕ СОХРАНЕНИЕ при каждом изменении
+    save_settings(settings)
+    
+    # Обновляем меню настроек
+    await update_settings_menu(query)
 
-# Команды настроек
-async def set_profit_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Команда /profit"""
-    try:
-        keyboard = get_main_keyboard()
-        if context.args and len(context.args) > 0:
-            profit = float(context.args[0])
-            if 0.1 <= profit <= 5.0:
-                settings['min_profit'] = profit
-                save_settings(settings)
-                await update.message.reply_text(
-                    f"✅ Минимальная прибыль установлена: {profit}%",
-                    reply_markup=keyboard
-                )
-            else:
-                await update.message.reply_text(
-                    "❌ Прибыль должна быть от 0.1% до 5.0%",
-                    reply_markup=keyboard
-                )
-        else:
-            await update.message.reply_text(
-                "💡 Использование: /profit 1.0",
-                reply_markup=keyboard
-            )
-    except ValueError:
-        keyboard = get_main_keyboard()
-        await update.message.reply_text(
-            "❌ Неверный формат числа. Пример: /profit 1.0",
-            reply_markup=keyboard
-        )
+async def update_settings_menu(query):
+    """Обновить меню настроек"""
+    keyboard = [
+        [
+            InlineKeyboardButton(f"💰 Прибыль: {settings.get('min_profit', 0.75)}%", callback_data="set_profit"),
+            InlineKeyboardButton(f"💵 Позиция: ${settings.get('max_position', 50.0)}", callback_data="set_position")
+        ],
+        [
+            InlineKeyboardButton(f"🎯 Режим: {settings.get('trading_mode', 'live')}", callback_data="toggle_mode"),
+            InlineKeyboardButton(f"🧪 Sandbox: {'✅' if settings.get('mexc_sandbox', False) else '❌'}", callback_data="toggle_sandbox")
+        ],
+        [
+            InlineKeyboardButton("💾 Сохранить настройки", callback_data="save_settings")
+        ]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    text = f"""
+🎛️ **Панель настроек:**
 
-async def set_position_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Команда /position"""
-    try:
-        keyboard = get_main_keyboard()
-        if context.args and len(context.args) > 0:
-            position = float(context.args[0])
-            if 10 <= position <= 1000:
-                settings['max_position'] = position
-                save_settings(settings)
-                await update.message.reply_text(
-                    f"✅ Максимальная позиция установлена: ${position}",
-                    reply_markup=keyboard
-                )
-            else:
-                await update.message.reply_text(
-                    "❌ Позиция должна быть от $10 до $1000",
-                    reply_markup=keyboard
-                )
-        else:
-            await update.message.reply_text(
-                "💡 Использование: /position 100",
-                reply_markup=keyboard
-            )
-    except ValueError:
-        keyboard = get_main_keyboard()
-        await update.message.reply_text(
-            "❌ Неверный формат числа. Пример: /position 100",
-            reply_markup=keyboard
-        )
+💰 Прибыль: {settings.get('min_profit', 0.75)}%
+💵 Позиция: ${settings.get('max_position', 50.0)}
+🎯 Режим: {settings.get('trading_mode', 'live')}
+🧪 Sandbox: {'✅' if settings.get('mexc_sandbox', False) else '❌'}
 
-async def set_mode_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Команда /mode"""
-    keyboard = get_main_keyboard()
-    if context.args and len(context.args) > 0:
-        mode = context.args[0].lower()
-        if mode in ['test', 'live']:
-            settings['trading_mode'] = mode
-            save_settings(settings)
-            await update.message.reply_text(
-                f"✅ Режим торговли установлен: {mode}",
-                reply_markup=keyboard
-            )
-        else:
-            await update.message.reply_text(
-                "❌ Режим должен быть 'test' или 'live'",
-                reply_markup=keyboard
-            )
-    else:
-        await update.message.reply_text(
-            "💡 Использование: /mode test или /mode live",
-            reply_markup=keyboard
-        )
+🔺 Только треугольный арбитраж на MEXC
+    """
+    
+    await query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
 
 def main():
     """Главная функция"""
@@ -509,35 +693,21 @@ def main():
     # Создаем приложение
     application = Application.builder().token(bot_token).build()
     
-    # Добавляем обработчик ошибок
-    application.add_error_handler(error_handler)
-    
-    # Добавляем обработчики команд
+    # Добавляем обработчики
     application.add_handler(CommandHandler("start", start_command))
-    application.add_handler(CommandHandler("profit", set_profit_command))
-    application.add_handler(CommandHandler("position", set_position_command))
-    application.add_handler(CommandHandler("mode", set_mode_command))
-    
-    # Обработчик текстовых сообщений (кнопки)
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    application.add_handler(MessageHandler(filters.TEXT, handle_message))
+    application.add_handler(CallbackQueryHandler(handle_callback))
     
     # Запускаем бота
-    logger.info("🤖 Запуск рабочего Telegram бота с кнопками...")
-    print("🔺 РАБОЧИЙ TELEGRAM БОТ С КНОПКАМИ")
-    print("📱 Кнопки управления внизу экрана")
+    logger.info("🤖 Запуск РАБОЧЕГО Telegram бота управления...")
+    print("🔺 РАБОЧИЙ TELEGRAM БОТ УПРАВЛЕНИЯ")
+    print("✅ Кнопки работают как до переключения на MEXC")
+    print("📱 Клавиатура постоянная внизу экрана")
     print("💾 Настройки сохраняются в triangular_settings.json")
-    print("🔺 Треугольный арбитраж на MEXC")
+    print("🔺 Только треугольный арбитраж на MEXC")
     print("⚠️ Арбитраж по умолчанию ВЫКЛЮЧЕН")
     
-    try:
-        application.run_polling(
-            drop_pending_updates=True,
-            allowed_updates=Update.ALL_TYPES,
-            timeout=30,
-            pool_timeout=30
-        )
-    except Exception as e:
-        logger.error(f"❌ Ошибка запуска бота: {e}")
+    application.run_polling()
 
 if __name__ == "__main__":
     main()

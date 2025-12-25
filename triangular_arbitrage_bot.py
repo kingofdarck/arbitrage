@@ -540,6 +540,16 @@ class TriangularArbitrageBot:
                 # Перезагружаем настройки каждые 10 секунд
                 self.load_control_settings()
                 
+                # Проверяем сигнал об обновлении настроек
+                if os.path.exists('settings_updated.signal'):
+                    try:
+                        os.remove('settings_updated.signal')
+                        self.load_control_settings()
+                        self.logger.info("📡 Получен сигнал обновления настроек")
+                        await self.send_telegram("🔄 **Настройки обновлены в реальном времени**\n\n✅ Новые параметры применены к работающему арбитражу")
+                    except Exception as e:
+                        self.logger.warning(f"⚠️ Ошибка обработки сигнала настроек: {e}")
+                
                 # Проверяем нужно ли запускать арбитраж
                 if not self.is_running and hasattr(self, 'should_run') and self.should_run:
                     self.logger.info("🚀 Получена команда запуска через Telegram")
@@ -569,6 +579,29 @@ class TriangularArbitrageBot:
                 cycle_start = time.time()
                 
                 self.logger.info(f"🔄 Цикл {self.stats['cycles']} - {datetime.now().strftime('%H:%M:%S')}")
+                
+                # Проверяем сигнал об обновлении настроек в процессе работы
+                if os.path.exists('settings_updated.signal'):
+                    try:
+                        os.remove('settings_updated.signal')
+                        old_settings = (self.min_profit, self.max_position, self.trading_mode)
+                        self.load_control_settings()
+                        new_settings = (self.min_profit, self.max_position, self.trading_mode)
+                        
+                        if old_settings != new_settings:
+                            self.logger.info("📡 Настройки обновлены в реальном времени")
+                            await self.send_telegram(f"""
+🔄 **НАСТРОЙКИ ОБНОВЛЕНЫ В РЕАЛЬНОМ ВРЕМЕНИ**
+
+⚙️ **Новые параметры:**
+• Минимальная прибыль: {self.min_profit}%
+• Максимальная позиция: ${self.max_position}
+• Режим торговли: {self.trading_mode}
+
+🔺 Изменения применены к работающему арбитражу
+                            """)
+                    except Exception as e:
+                        self.logger.warning(f"⚠️ Ошибка обработки сигнала настроек: {e}")
                 
                 # Ищем треугольные возможности
                 opportunities = await self.find_triangular_opportunities()
