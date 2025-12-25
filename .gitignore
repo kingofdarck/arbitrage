@@ -2,6 +2,7 @@
 
 # Оставляем только эти файлы:
 # triangular_arbitrage_bot.py
+# auto_triangular_bot.py
 # main.py
 # .env
 # requirements.txt
@@ -10,11 +11,14 @@
 # .gitignore
 # README.md
 # ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
+# АВТОНОМНЫЙ_БОТ_ГОТОВ.md
 # test_telegram.py
+# test_auto_bot.py
 
 # Игнорируем все остальное
 *
 !triangular_arbitrage_bot.py
+!auto_triangular_bot.py
 !main.py
 !.env
 !requirements.txt
@@ -23,7 +27,9 @@
 !.gitignore
 !README.md
 !ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
+!АВТОНОМНЫЙ_БОТ_ГОТОВ.md
 !test_telegram.py
+!test_auto_bot.py
 
 # Логи
 *.log
