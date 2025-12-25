@@ -8,6 +8,7 @@
 # Dockerfile
 # railway.json
 # .gitignore
+# README.md
 # ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
 
 # Игнорируем все остальное
@@ -19,6 +20,7 @@
 !Dockerfile
 !railway.json
 !.gitignore
+!README.md
 !ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
 
 # Логи
