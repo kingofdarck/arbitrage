@@ -6,6 +6,7 @@
 # fixed_auto_bot.py
 # simple_working_bot.py
 # ultra_simple_bot.py
+# railway_bot.py
 # main.py
 # .env
 # requirements.txt
@@ -17,11 +18,13 @@
 # АВТОНОМНЫЙ_БОТ_ГОТОВ.md
 # БОТ_ИСПРАВЛЕН_ГОТОВ.md
 # ПРОСТОЙ_БОТ_РАБОТАЕТ.md
+# УЛЬТРА_ПРОСТОЙ_БОТ.md
 # test_telegram.py
 # test_auto_bot.py
 # test_fixed_bot.py
 # test_simple_bot.py
 # test_ultra_simple.py
+# test_railway_bot.py
 
 # Игнорируем все остальное
 *
@@ -30,6 +33,7 @@
 !fixed_auto_bot.py
 !simple_working_bot.py
 !ultra_simple_bot.py
+!railway_bot.py
 !main.py
 !.env
 !requirements.txt
@@ -41,11 +45,13 @@
 !АВТОНОМНЫЙ_БОТ_ГОТОВ.md
 !БОТ_ИСПРАВЛЕН_ГОТОВ.md
 !ПРОСТОЙ_БОТ_РАБОТАЕТ.md
+!УЛЬТРА_ПРОСТОЙ_БОТ.md
 !test_telegram.py
 !test_auto_bot.py
 !test_fixed_bot.py
 !test_simple_bot.py
 !test_ultra_simple.py
+!test_railway_bot.py
 
 # Логи
 *.log
