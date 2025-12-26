@@ -1,4 +1,4 @@
-# Dockerfile для автономного треугольного арбитража
+# Dockerfile для Railway треугольного арбитража
 FROM python:3.11-slim
 
 # Создаем рабочую директорию
@@ -10,11 +10,10 @@ RUN pip install --no-cache-dir --upgrade pip && \
     ccxt==4.1.64 \
     python-telegram-bot==20.7 \
     python-dotenv==1.0.0 \
-    psutil==5.9.6 \
-    aiohttp==3.9.1
+    psutil==5.9.6
 
 # Копируем файлы
-COPY autonomous_arbitrage_bot.py .
+COPY railway_bot.py .
 COPY main.py .
 COPY .env .
 
