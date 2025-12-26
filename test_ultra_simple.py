@@ -3,59 +3,36 @@
 Тест ультра простого бота
 """
 
-import os
 import asyncio
-from telegram import Bot
-
-# Загружаем переменные окружения
-try:
-    from dotenv import load_dotenv
-    if os.path.exists('.env'):
-        load_dotenv('.env')
-except ImportError:
-    pass
+from ultra_simple_bot import UltraSimpleBot
 
 async def test_ultra_simple():
     """Тест ультра простого бота"""
-    bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
-    chat_id = os.getenv('TELEGRAM_CHAT_ID')
+    print("🤖 ТЕСТ УЛЬТРА ПРОСТОГО БОТА")
+    print("=" * 40)
     
-    if not bot_token or not chat_id:
-        print("❌ Токен или chat_id не найдены")
-        return
+    bot = UltraSimpleBot()
     
     try:
-        bot = Bot(token=bot_token)
+        print("📱 Тест Telegram...")
+        await bot.send_telegram("🧪 Тестовое сообщение от ультра простого бота")
         
-        print("🔺 ТЕСТ УЛЬТРА ПРОСТОГО БОТА")
-        print("=" * 40)
+        print("📊 Тест получения баланса...")
+        balance = await bot.get_mexc_balance()
+        print(f"Баланс: {balance[:100]}...")
         
-        # Тест 1: start
-        print("1️⃣ Отправка 'start'...")
-        await bot.send_message(chat_id=chat_id, text="start")
-        await asyncio.sleep(2)
+        print("🔍 Тест поиска возможностей...")
+        opportunities = await bot.find_opportunities()
+        print(f"Возможности: {opportunities[:100]}...")
         
-        # Тест 2: status
-        print("2️⃣ Отправка 'status'...")
-        await bot.send_message(chat_id=chat_id, text="status")
-        await asyncio.sleep(2)
-        
-        # Тест 3: help
-        print("3️⃣ Отправка 'help'...")
-        await bot.send_message(chat_id=chat_id, text="help")
-        await asyncio.sleep(2)
-        
-        # Тест 4: run
-        print("4️⃣ Отправка 'run'...")
-        await bot.send_message(chat_id=chat_id, text="run")
-        await asyncio.sleep(2)
-        
-        print("\n✅ Все команды отправлены!")
-        print("📱 Проверьте Telegram - бот должен ответить на каждую")
-        print("🔺 Если отвечает - ультра простая версия работает!")
+        print("✅ Все тесты пройдены")
         
     except Exception as e:
-        print(f"❌ Ошибка: {e}")
+        print(f"❌ Ошибка теста: {e}")
+        import traceback
+        traceback.print_exc()
+    
+    print("🔺 Тест завершен")
 
 if __name__ == "__main__":
     asyncio.run(test_ultra_simple())

@@ -5,6 +5,7 @@
 # auto_triangular_bot.py
 # fixed_auto_bot.py
 # simple_working_bot.py
+# ultra_simple_bot.py
 # main.py
 # .env
 # requirements.txt
@@ -15,10 +16,12 @@
 # ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
 # АВТОНОМНЫЙ_БОТ_ГОТОВ.md
 # БОТ_ИСПРАВЛЕН_ГОТОВ.md
+# ПРОСТОЙ_БОТ_РАБОТАЕТ.md
 # test_telegram.py
 # test_auto_bot.py
 # test_fixed_bot.py
 # test_simple_bot.py
+# test_ultra_simple.py
 
 # Игнорируем все остальное
 *
@@ -26,6 +29,7 @@
 !auto_triangular_bot.py
 !fixed_auto_bot.py
 !simple_working_bot.py
+!ultra_simple_bot.py
 !main.py
 !.env
 !requirements.txt
@@ -36,10 +40,12 @@
 !ЧИСТАЯ_СИСТЕМА_ГОТОВА.md
 !АВТОНОМНЫЙ_БОТ_ГОТОВ.md
 !БОТ_ИСПРАВЛЕН_ГОТОВ.md
+!ПРОСТОЙ_БОТ_РАБОТАЕТ.md
 !test_telegram.py
 !test_auto_bot.py
 !test_fixed_bot.py
 !test_simple_bot.py
+!test_ultra_simple.py
 
 # Логи
 *.log

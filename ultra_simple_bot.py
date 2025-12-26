@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Ультра простой Telegram бот - минимальный код для Railway
+УЛЬТРА ПРОСТОЙ бот который точно работает
+Только отчеты о балансе каждые 5 минут + поиск возможностей
 """
 
+import asyncio
+import time
 import os
-import json
 from datetime import datetime
-from telegram import Update
-from telegram.ext import Application, MessageHandler, ContextTypes, filters
 
 # Загружаем переменные окружения
 try:
@@ -17,212 +17,216 @@ try:
 except ImportError:
     pass
 
-# Простые настройки
-settings = {
-    'min_profit': 0.75,
-    'max_position': 50.0,
-    'trading_mode': 'live',
-    'bot_running': False,
-    'total_trades': 0,
-    'successful_trades': 0,
-    'total_profit': 0.0
-}
-
-def save_settings():
-    """Сохранить настройки"""
-    try:
-        with open('settings.json', 'w') as f:
-            json.dump(settings, f)
-    except:
-        pass
-
-def load_settings():
-    """Загрузить настройки"""
-    try:
-        if os.path.exists('settings.json'):
-            with open('settings.json', 'r') as f:
-                global settings
-                settings.update(json.load(f))
-    except:
-        pass
-
-async def handle_all_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Обработчик всех сообщений"""
-    try:
-        if not update.message or not update.message.text:
+class UltraSimpleBot:
+    """Ультра простой бот"""
+    
+    def __init__(self):
+        self.telegram_bot = None
+        self.telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
+        self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID')
+        
+        self.cycles = 0
+        self.start_time = time.time()
+        self.last_balance_report = 0
+        
+        print("Ультра простой бот инициализирован")
+    
+    async def send_telegram(self, message: str):
+        """Отправка сообщения в Telegram"""
+        if not self.telegram_token or not self.telegram_chat_id:
+            print(f"[Telegram] {message}")
             return
-            
-        text = update.message.text.lower()
         
-        # Команды
-        if text in ['/start', 'start', 'старт', 'привет']:
-            response = f"""
-🔺 ТРЕУГОЛЬНЫЙ АРБИТРАЖ НА MEXC
-
-Простой бот управления. Команды:
-
-📊 УПРАВЛЕНИЕ:
-• start / старт - это сообщение
-• status / статус - статус системы  
-• run / запуск - запустить арбитраж
-• stop / стоп - остановить арбитраж
-• help / помощь - справка
-
-⚙️ НАСТРОЙКИ:
-• Прибыль: {settings['min_profit']}%
-• Позиция: ${settings['max_position']}
-• Режим: {settings['trading_mode']}
-• Статус: {'🟢 Работает' if settings['bot_running'] else '🔴 Остановлен'}
-
-💡 Просто напишите команду
-            """
-            
-        elif text in ['status', 'статус', '/status']:
-            status = "🟢 Работает" if settings['bot_running'] else "🔴 Остановлен"
-            response = f"""
-📊 СТАТУС MEXC АРБИТРАЖА
-
-{status}
-
-⚙️ Настройки:
-• Прибыль: {settings['min_profit']}%
-• Позиция: ${settings['max_position']}
-• Режим: {settings['trading_mode']}
-
-📈 Статистика:
-• Сделок: {settings['total_trades']}
-• Успешных: {settings['successful_trades']}
-• Прибыль: ${settings['total_profit']:.2f}
-
-🔺 Треугольный арбитраж на MEXC
-            """
-            
-        elif text in ['run', 'запуск', '/start_trading', 'запустить']:
-            settings['bot_running'] = True
-            save_settings()
-            response = """
-✅ АРБИТРАЖ ЗАПУЩЕН!
-
-🔺 Поиск треугольных возможностей на MEXC
-📱 Уведомления будут приходить сюда
-⚙️ Используйте 'стоп' для остановки
-
-💰 Ищем прибыль 0.75%+ среди 3361 пары
-            """
-            
-        elif text in ['stop', 'стоп', '/stop_trading', 'остановить']:
-            settings['bot_running'] = False
-            save_settings()
-            response = """
-⏹️ АРБИТРАЖ ОСТАНОВЛЕН!
-
-🛑 Поиск возможностей приостановлен
-📊 Статистика сохранена
-▶️ Используйте 'запуск' для возобновления
-            """
-            
-        elif text in ['help', 'помощь', '/help', 'команды']:
-            response = """
-🆘 КОМАНДЫ УПРАВЛЕНИЯ
-
-📊 ОСНОВНЫЕ:
-• start / старт - приветствие
-• status / статус - статус системы
-• run / запуск - запустить арбитраж
-• stop / стоп - остановить арбитраж
-• help / помощь - эта справка
-
-⚙️ НАСТРОЙКИ:
-• profit 1.0 - установить прибыль 1.0%
-• position 100 - установить позицию $100
-• mode test - тестовый режим
-• mode live - реальный режим
-
-🔺 MEXC треугольный арбитраж 24/7
-            """
-            
-        elif text.startswith('profit '):
-            try:
-                value = float(text.split()[1])
-                if 0.1 <= value <= 5.0:
-                    settings['min_profit'] = value
-                    save_settings()
-                    response = f"✅ Прибыль установлена: {value}%"
-                else:
-                    response = "❌ Прибыль должна быть от 0.1% до 5.0%"
-            except:
-                response = "❌ Формат: profit 1.0"
-                
-        elif text.startswith('position '):
-            try:
-                value = float(text.split()[1])
-                if 10 <= value <= 1000:
-                    settings['max_position'] = value
-                    save_settings()
-                    response = f"✅ Позиция установлена: ${value}"
-                else:
-                    response = "❌ Позиция должна быть от $10 до $1000"
-            except:
-                response = "❌ Формат: position 100"
-                
-        elif text.startswith('mode '):
-            try:
-                mode = text.split()[1]
-                if mode in ['test', 'live']:
-                    settings['trading_mode'] = mode
-                    save_settings()
-                    response = f"✅ Режим установлен: {mode}"
-                else:
-                    response = "❌ Режим: test или live"
-            except:
-                response = "❌ Формат: mode live"
-                
-        else:
-            response = """
-❓ Неизвестная команда
-
-💡 Доступные команды:
-• start - приветствие
-• status - статус
-• run - запустить
-• stop - остановить  
-• help - справка
-
-Или напишите 'help' для полного списка
-            """
-        
-        await update.message.reply_text(response)
-        
-    except Exception as e:
         try:
-            await update.message.reply_text("❌ Ошибка. Попробуйте 'help'")
-        except:
-            pass
+            if not self.telegram_bot:
+                from telegram import Bot
+                self.telegram_bot = Bot(token=self.telegram_token)
+            
+            await self.telegram_bot.send_message(
+                chat_id=self.telegram_chat_id,
+                text=message
+            )
+            print(f"[Telegram] Отправлено: {message[:50]}...")
+        except Exception as e:
+            print(f"[Telegram] Ошибка: {e}")
+    
+    async def get_mexc_balance(self):
+        """Получить баланс с MEXC"""
+        try:
+            import ccxt
+            
+            api_key = os.getenv('MEXC_API_KEY')
+            api_secret = os.getenv('MEXC_API_SECRET')
+            
+            if not api_key or not api_secret:
+                return "Нет API ключей MEXC"
+            
+            # Простое подключение к MEXC
+            exchange = ccxt.mexc({
+                'apiKey': api_key,
+                'secret': api_secret,
+                'sandbox': False,
+                'enableRateLimit': True
+            })
+            
+            # Получаем баланс
+            balance = exchange.fetch_balance()
+            
+            # Собираем валюты с балансом
+            currencies = []
+            total_usdt = 0
+            
+            for currency, info in balance.items():
+                free = info.get('free', 0)
+                if free > 0.001:
+                    currencies.append(f"{currency}: {free:.6f}")
+                    
+                    if currency == 'USDT':
+                        total_usdt += free
+                    else:
+                        # Пробуем оценить в USDT
+                        try:
+                            ticker = exchange.fetch_ticker(f"{currency}/USDT")
+                            usdt_value = free * ticker['last']
+                            total_usdt += usdt_value
+                            currencies[-1] += f" (≈{usdt_value:.2f} USDT)"
+                        except:
+                            pass
+            
+            if not currencies:
+                return "Нет доступных средств на MEXC"
+            
+            # Формируем отчет
+            report = "💰 ОТЧЕТ О БАЛАНСЕ MEXC\n\n"
+            report += "\n".join(currencies[:10])
+            report += f"\n\n💵 Общая стоимость: ≈{total_usdt:.2f} USDT"
+            
+            return report
+            
+        except Exception as e:
+            return f"Ошибка получения баланса MEXC: {e}"
+    
+    async def find_opportunities(self):
+        """Поиск простых возможностей"""
+        try:
+            import ccxt
+            
+            api_key = os.getenv('MEXC_API_KEY')
+            api_secret = os.getenv('MEXC_API_SECRET')
+            
+            if not api_key or not api_secret:
+                return "Нет API ключей для поиска"
+            
+            exchange = ccxt.mexc({
+                'apiKey': api_key,
+                'secret': api_secret,
+                'sandbox': False,
+                'enableRateLimit': True
+            })
+            
+            # Простые пары для проверки
+            pairs = ['BTC/USDT', 'ETH/USDT', 'BNB/USDT']
+            opportunities = []
+            
+            for pair in pairs:
+                try:
+                    ticker = exchange.fetch_ticker(pair)
+                    
+                    # Простая проверка спреда
+                    bid = ticker['bid']
+                    ask = ticker['ask']
+                    spread = ((ask - bid) / bid) * 100
+                    
+                    if spread < 0.5:  # Хороший спред
+                        opportunities.append(f"{pair}: спред {spread:.3f}%")
+                        
+                except Exception as e:
+                    continue
+            
+            if opportunities:
+                return "🔍 НАЙДЕННЫЕ ВОЗМОЖНОСТИ:\n\n" + "\n".join(opportunities)
+            else:
+                return "🔍 Возможности не найдены (спреды слишком большие)"
+                
+        except Exception as e:
+            return f"Ошибка поиска возможностей: {e}"
+    
+    async def run(self):
+        """Главный цикл"""
+        print("🤖 Запуск ультра простого бота...")
+        
+        # Стартовое сообщение
+        await self.send_telegram("🤖 УЛЬТРА ПРОСТОЙ БОТ ЗАПУЩЕН\n\nОтчеты каждые 5 минут\nПоиск возможностей каждую минуту")
+        
+        while True:
+            try:
+                self.cycles += 1
+                current_time = datetime.now().strftime('%H:%M:%S')
+                print(f"\n[{current_time}] Цикл {self.cycles}")
+                
+                # Отчет о балансе каждые 5 минут
+                if time.time() - self.last_balance_report >= 300:  # 5 минут
+                    print("[Баланс] Получение отчета о балансе...")
+                    balance_report = await self.get_mexc_balance()
+                    
+                    # Добавляем статистику
+                    uptime = (time.time() - self.start_time) / 3600
+                    full_report = balance_report + f"\n\n📊 Время работы: {uptime:.1f}ч\n🔄 Циклов: {self.cycles}\n⏰ Время: {current_time}"
+                    
+                    await self.send_telegram(full_report)
+                    self.last_balance_report = time.time()
+                    print("[Баланс] Отчет отправлен")
+                
+                # Поиск возможностей каждый цикл
+                print("[Поиск] Поиск возможностей...")
+                opportunities = await self.find_opportunities()
+                
+                # Отправляем только если найдены хорошие возможности
+                if "спред" in opportunities and "0.1" in opportunities:
+                    await self.send_telegram(opportunities + f"\n\n⏰ Время: {current_time}")
+                    print("[Поиск] Возможности найдены и отправлены")
+                else:
+                    print("[Поиск] Хороших возможностей не найдено")
+                
+                # Краткая статистика каждые 10 циклов
+                if self.cycles % 10 == 0:
+                    uptime = (time.time() - self.start_time) / 3600
+                    stats = f"📊 Статистика: {uptime:.1f}ч работы, {self.cycles} циклов, время {current_time}"
+                    await self.send_telegram(stats)
+                    print("[Статистика] Отправлена")
+                
+                # Пауза между циклами (1 минута)
+                print("[Ожидание] 60 секунд до следующего цикла...")
+                await asyncio.sleep(60)
+                
+            except KeyboardInterrupt:
+                print("\n[Остановка] По запросу пользователя")
+                await self.send_telegram("⏹️ Ультра простой бот остановлен")
+                break
+            except Exception as e:
+                print(f"[Ошибка] Цикл: {e}")
+                await self.send_telegram(f"⚠️ Ошибка в цикле: {e}")
+                await asyncio.sleep(30)  # Пауза при ошибке
 
-def main():
+async def main():
     """Главная функция"""
-    bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+    print("🤖 УЛЬТРА ПРОСТОЙ ТРЕУГОЛЬНЫЙ АРБИТРАЖ")
+    print("=" * 50)
+    print("✅ Максимально упрощенная версия")
+    print("📊 Отчеты о балансе каждые 5 минут")
+    print("🔍 Поиск возможностей каждую минуту")
+    print("📱 Все уведомления в Telegram")
+    print("🛡️ Безопасно - только мониторинг")
+    print("=" * 50)
     
-    if not bot_token:
-        print("❌ TELEGRAM_BOT_TOKEN не найден")
-        return
-    
-    load_settings()
-    
-    # Создаем приложение
-    application = Application.builder().token(bot_token).build()
-    
-    # Один обработчик для всех сообщений
-    application.add_handler(MessageHandler(filters.TEXT, handle_all_messages))
-    
-    print("🤖 Ультра простой бот запущен")
-    print("🔺 MEXC треугольный арбитраж")
-    print("📱 Обрабатывает все текстовые сообщения")
+    bot = UltraSimpleBot()
     
     try:
-        application.run_polling(drop_pending_updates=True)
+        await bot.run()
+    except KeyboardInterrupt:
+        print("\n⏹️ Остановка...")
     except Exception as e:
-        print(f"❌ Ошибка: {e}")
+        print(f"❌ Критическая ошибка: {e}")
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
